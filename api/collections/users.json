@@ -1,0 +1,23 @@
+[
+  {
+    "_id": {
+      "$oid": "5fd37f48c9e7f9325c1634e9"
+    },
+    "email": "admin@gmail.com",
+    "password": "admin"
+  },
+  {
+    "_id": {
+      "$oid": "5fd37fa3c9e7f9325c1634ea"
+    },
+    "email": "test@gmail.com",
+    "password": "test"
+  },
+  {
+    "_id": {
+      "$oid": "5fd37f48c9e7f9325c1634e5"
+    },
+    "email": "new@gmail.com",
+    "password": "new"
+  }
+]
