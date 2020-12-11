@@ -12,6 +12,7 @@ import { ProductStatsComponent } from './dashboard/product-stats/product-stats.c
 import { ProfileSectionComponent } from './dashboard/profile-section/profile-section.component';
 import { LastProductComponent } from './dashboard/last-product/last-product.component';
 import { ChatbotComponent } from './chatbot/chatbot.component';
+import { LoginComponent } from './login/login.component';
 
 export const routes: Routes = [
   { path: '', component: DashboardComponent, pathMatch: 'full' },
@@ -27,7 +28,8 @@ export const routes: Routes = [
     ProductStatsComponent,
     ProfileSectionComponent,
     LastProductComponent,
-    ChatbotComponent
+    ChatbotComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,

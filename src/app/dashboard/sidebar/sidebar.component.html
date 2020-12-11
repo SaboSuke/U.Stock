@@ -1,18 +1,18 @@
 <div class="container">
-    <div class="wrapper">
-        <div class="home active">
+    <div class="wrapper" id="navigation">
+        <div class="home" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
             <span>
-                <a [routerLink]="['', '']"><i class="fas fa-home"></i></a>
+                <a routerLink="/admin/formationView"><i class="fas fa-home"></i></a>
             </span>
         </div>
-        <div class="list">
+        <div class="list" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
             <span>
-                <a [routerLink]="['', '']"> <i class="fas fa-stream"></i></a>
+                <a routerLink="/admin/formationView"> <i class="fas fa-stream"></i></a>
             </span>
         </div>
-        <div class="settings">
-            <span>
-                <a [routerLink]="['', '']"> <i class="fas fa-cog"></i></a>
+        <div class="settings" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+            <span >
+                <a routerLink="/admin/formationView"> <i class="fas fa-cog"></i></a>
             </span>
         </div>
     </div>
