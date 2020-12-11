@@ -7,6 +7,10 @@ just run the following command:
 
 > ```npm i ```
 
+then get in the ./api folder and rerun
+
+> ```npm i ```
+
 ## Angular Setup
 * open terminal and run the following command
 > ```ng serve```
