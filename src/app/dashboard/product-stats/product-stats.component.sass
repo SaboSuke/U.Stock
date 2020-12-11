@@ -1,0 +1,72 @@
+@import url('https://fonts.googleapis.com/css2?family=Quicksand&display=swap')
+
+@import '../../../_variables.sass'
+
+.container
+    margin-top: 20px
+    width: 100%
+    .wrapper
+        width: 100%
+        display: flex
+        justify-content: space-between
+
+.out_of_stock_products, 
+.all_products,
+.unconfirmed_products
+    margin-right: 30px
+
+.total_sails
+    background-color: $primary
+    border-radius: 20px
+    padding: 5px 20px
+    height: 80px
+    width: 310px
+    box-shadow: $boxShadow
+    p
+        color: $white
+        font-size: 20px
+        font-family: 'Quicksand medium', sans-serif
+    &>p 
+        text-align: center
+    div
+        display: flex
+        justify-content: center
+        p 
+            font-size: 14px
+            font-family: 'Quicksand regular', sans-serif
+            border-right: 1px solid $white
+            padding-right: 30px
+            span 
+                font-family: 'Quicksand medium', sans-serif
+        i  
+            margin-top: 10px
+            margin-left: 30px
+            color: $white
+
+.product_box
+    
+    border-radius: 20px
+    background-color: $white
+    box-shadow: $boxShadow
+    width: 240px
+    padding: 20px
+    height: 80px
+    display: flex
+    flex-direction: row
+    justify-content: flex-strat
+    place-items: center
+    img
+        width: 55px
+        margin-right: 10px
+    .inner_text
+        display: flex
+        flex-direction: column
+        margin-top: 5px
+        .text 
+            font-size: 12px
+            color: $lowerPriority
+            font-family: 'Quicksand medium', sans-serif
+        .data  
+            font-size: 22px
+            color: $black
+            font-family: 'Quicksand medium', sans-serif

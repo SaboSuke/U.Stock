@@ -7,10 +7,14 @@ just run the following command:
 
 > ```npm i ```
 
+## Angular Setup
+* open terminal and run the following command
+> ```ng serve```
+
 ## Server Setup
 * open terminal and run the following command
 
-> ```npm run bt```
+> ```npm run manage```
 
 ## Routes
 * API

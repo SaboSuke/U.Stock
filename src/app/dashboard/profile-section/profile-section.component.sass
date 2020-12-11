@@ -1,0 +1,42 @@
+@import url('https://fonts.googleapis.com/css2?family=Quicksand&display=swap')
+
+@import '../../../_variables.sass'
+    
+.container
+
+    .wrapper
+        margin-left: 30px
+        border-radius: 20px
+        padding: 35px 30px
+        background-color: $white
+        width: 310px
+        height: 300px
+        box-shadow: $boxShadow
+        
+.section
+    display: flex
+    align-items: center
+
+    .between
+        margin-left: 20px
+        p
+            transform: translateY(-15px)
+            span:first-child 
+                font-family: 'Quicksand medium', sans-serif
+                font-size: 16px
+            span.second 
+                font-family: 'Quicksand medium', sans-serif
+                font-size: 12px
+                color: $lowerPriority
+.bottom
+    display: flex
+    justify-content: space-between
+    margin-bottom: 40px
+
+    span:first-child
+        font-family: 'Quicksand medium', sans-serif
+        font-size: 16px
+    span.second
+        font-family: 'Quicksand medium', sans-serif
+        font-size: 14px
+        color: $lowerPriority
