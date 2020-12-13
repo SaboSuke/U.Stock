@@ -1,7 +1,38 @@
 <div class="container">
     <div class="wrapper">
         <nav>
-            <img src="../../assets/logo/ustock.png" alt="U.STOCK logo">
+            <img src="../../assets/logo/ustock light.png" alt="U.STOCK logo">
         </nav>
+        <div class="cover"></div>
+        <div class="split">
+                <div class="right">
+                    <form [formGroup]="checkoutForm" class="wrapper" (ngSubmit)="Login(checkoutForm.value, $event)">
+                        <h2>Welcome Back</h2>
+                        <div class="input_group">
+                            <span>Email</span>
+                            <input formControlName="email"  type="email" name="email" id="email" required>
+                        </div>
+                        <div class="input_group">
+                            <span>Password</span>
+                            <input  formControlName="password" type="password" name="password" id="password" required>
+                        </div> 
+                        <div class="signup">
+                            <h4>Sign in</h4>
+                            <button type="submit">
+                                <i class="fas fa-arrow-right"></i>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+                <div class="left">
+                    <img src="../../assets/character/character.png" alt="character image">
+                    <h2>Inventory Management</h2>
+                    <p>The more inventory a company has, the less likely they will have what they need.</p>
+                </div>
+        </div>
+
+       <div class="copyright">
+            <p>© Copyright  2020.</p>
+       </div>
     </div>
 </div>

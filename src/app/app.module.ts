@@ -1,6 +1,8 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -13,9 +15,13 @@ import { ProfileSectionComponent } from './dashboard/profile-section/profile-sec
 import { LastProductComponent } from './dashboard/last-product/last-product.component';
 import { ChatbotComponent } from './chatbot/chatbot.component';
 import { LoginComponent } from './login/login.component';
+import { SiteService } from './services/site.service';
+import { AuthService } from './services/auth.service';
 
 export const routes: Routes = [
-  { path: '', component: DashboardComponent, pathMatch: 'full' },
+  { path: '', redirectTo: '/login', pathMatch: 'full' },
+  { path: 'login', component: LoginComponent, pathMatch: 'full' },
+  { path: 'dashboard/home', component: DashboardComponent},
 ]
 
 @NgModule({
@@ -34,9 +40,15 @@ export const routes: Routes = [
   imports: [
     BrowserModule,
     AppRoutingModule,
+    ReactiveFormsModule,
+    HttpClientModule,
     RouterModule.forRoot(routes)
   ],
-  providers: [],
+  providers: [
+    FormBuilder,
+    SiteService,
+    AuthService
+  ],
   bootstrap: [AppComponent],
   schemas: [
     CUSTOM_ELEMENTS_SCHEMA,

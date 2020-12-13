@@ -46,6 +46,7 @@ var userLogin = function userLogin(userCreds, res) {
 
           return _context.abrupt("return", res.status(404).json({
             message: "Email is not found. Invalid login credentials.",
+            code: "ENF",
             success: false
           }));
 
@@ -64,19 +65,20 @@ var userLogin = function userLogin(userCreds, res) {
             expiresIn: "1 days"
           });
           result = {
-            username: user.username,
             email: user.email,
             token: "Bearer ".concat(token),
-            expiresIn: '24 Hours'
+            expiresIn: "24 Hours"
           };
           return _context.abrupt("return", res.status(200).json(_objectSpread({}, result, {
             message: "Hurray! You are now logged in.",
+            code: "SCS",
             success: true
           })));
 
         case 12:
           return _context.abrupt("return", res.status(403).json({
             message: "Incorrect password.",
+            code: "IP",
             success: false
           }));
 

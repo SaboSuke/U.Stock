@@ -9,48 +9,50 @@ const bp = require("body-parser");
  * @DESC To Login the user (ADMIN, SUPER_ADMIN, USER)
  */
 const userLogin = async(userCreds, res) => {
-  let { email, password } = userCreds;
-  // First Check if the username is in the database
-  const user = await User.findOne({ email });
-  if (!user) {
+    let { email, password } = userCreds;
+    // First Check if the username is in the database
+    const user = await User.findOne({ email });
+    if (!user) {
     return res.status(404).json({
-      message: "Email is not found. Invalid login credentials.",
-      success: false,
+        message: "Email is not found. Invalid login credentials.",
+        code: "ENF",
+        success: false,
     });
-  }
-  
-  // Now check for the password
-  if (password == user.password) {
+    }
+
+    // Now check for the password
+    if (password == user.password) {
     // Sign in the token and issue it to the user
     let token = jwt.sign(
-      {
+        {
         user_id: user._id,
         username: user.username,
         email: user.email,
-      },
-      SECRET,
-      { expiresIn: "1 days" }
+        },
+        SECRET,
+        { expiresIn: "1 days" }
     );
 
     let result = {
-      username: user.username,
-      email: user.email,
-      token: `Bearer ${token}`,
-      expiresIn: '24 Hours',
+        email: user.email,
+        token: `Bearer ${token}`,
+        expiresIn: "24 Hours",
     };
 
     return res.status(200).json({
-      ...result,
-      message: "Hurray! You are now logged in.",
-      success: true,
+        ...result,
+        message: "Hurray! You are now logged in.",
+        code: "SCS",
+        success: true,
     });
-  } else {
+    } else {
     return res.status(403).json({
-      message: "Incorrect password.",
-      success: false,
+        message: "Incorrect password.",
+        code: "IP",
+        success: false,
     });
-  }
-};
+    }
+    };
 
 /**
  * @DESC To update user profile (ADMIN, SUPER_ADMIN, USER)
