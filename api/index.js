@@ -23,14 +23,17 @@ app.use(function (req, res, next) {
   );
   next();
 });
+//app.use(exp.bodyParser());
 app.use(bp.json());
 app.use(passport.initialize());
+//app.use(exp.json());
+// app.use(bp.urlencoded({extended : true })); 
 
 require("./middlewares/passport")(passport);
 
 // User Router Middleware
-
 app.use("/api/users", require("./routes/users"));
+app.use("/api/products", require("./routes/products"));
 
 const startApp = async () => {
   try {

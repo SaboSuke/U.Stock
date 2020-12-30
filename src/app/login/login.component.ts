@@ -4,6 +4,7 @@ import { FormBuilder } from '@angular/forms';
 import { FormsModule } from '@angular/forms';
 import { SiteService } from '../services/site.service';
 import { AuthService } from '../services/auth.service';
+import {MatSidenavModule} from '@angular/material/sidenav';
 
 @Component({
   selector: 'app-login',
@@ -27,8 +28,6 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {
   }
-
-
 
   Login(customerData: any, event: any){
     event.preventDefault();

@@ -17,7 +17,7 @@ var app_component_1 = require("./app.component");
 var dashboard_component_1 = require("./dashboard/dashboard.component");
 var sidebar_component_1 = require("./dashboard/sidebar/sidebar.component");
 var topbar_component_1 = require("./dashboard/topbar/topbar.component");
-var statistics_component_1 = require("./dashboard/statistics/statistics.component");
+//import { StatisticsComponent } from './dashboard/statistics/statistics.component';
 var product_stats_component_1 = require("./dashboard/product-stats/product-stats.component");
 var profile_section_component_1 = require("./dashboard/profile-section/profile-section.component");
 var last_product_component_1 = require("./dashboard/last-product/last-product.component");
@@ -25,10 +25,18 @@ var chatbot_component_1 = require("./chatbot/chatbot.component");
 var login_component_1 = require("./login/login.component");
 var site_service_1 = require("./services/site.service");
 var auth_service_1 = require("./services/auth.service");
+var animations_1 = require("@angular/platform-browser/animations");
+var statistics_component_1 = require("./dashboard/statistics/statistics.component");
+var product_list_component_1 = require("./dashboard/product-list/product-list.component");
+var edit_product_component_1 = require("./dashboard/edit-product/edit-product.component");
+var settings_component_1 = require("./dashboard/settings/settings.component");
 exports.routes = [
     { path: '', redirectTo: '/login', pathMatch: 'full' },
     { path: 'login', component: login_component_1.LoginComponent, pathMatch: 'full' },
     { path: 'dashboard/home', component: dashboard_component_1.DashboardComponent },
+    { path: 'dashboard/list', component: product_list_component_1.ProductListComponent },
+    { path: 'dashboard/edit', component: edit_product_component_1.EditProductComponent },
+    { path: 'dashboard/settings', component: settings_component_1.SettingsComponent },
 ];
 var AppModule = /** @class */ (function () {
     function AppModule() {
@@ -40,19 +48,24 @@ var AppModule = /** @class */ (function () {
                 dashboard_component_1.DashboardComponent,
                 sidebar_component_1.SidebarComponent,
                 topbar_component_1.TopbarComponent,
-                statistics_component_1.StatisticsComponent,
+                //StatisticsComponent,
                 product_stats_component_1.ProductStatsComponent,
                 profile_section_component_1.ProfileSectionComponent,
                 last_product_component_1.LastProductComponent,
                 chatbot_component_1.ChatbotComponent,
-                login_component_1.LoginComponent
+                login_component_1.LoginComponent,
+                statistics_component_1.StatisticsComponent,
+                product_list_component_1.ProductListComponent,
+                edit_product_component_1.EditProductComponent,
+                settings_component_1.SettingsComponent
             ],
             imports: [
                 platform_browser_1.BrowserModule,
                 app_routing_module_1.AppRoutingModule,
                 forms_1.ReactiveFormsModule,
                 http_1.HttpClientModule,
-                router_1.RouterModule.forRoot(exports.routes)
+                router_1.RouterModule.forRoot(exports.routes),
+                animations_1.BrowserAnimationsModule
             ],
             providers: [
                 forms_1.FormBuilder,

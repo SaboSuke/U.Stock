@@ -31,14 +31,17 @@ app.use(function (req, res, next) {
   res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE");
   res.header("Access-Control-Allow-Headers", "Content-Type, Origin, Authorization, Accept, X-Requested-With");
   next();
-});
+}); //app.use(exp.bodyParser());
+
 app.use(bp.json());
-app.use(passport.initialize());
+app.use(passport.initialize()); //app.use(exp.json());
+// app.use(bp.urlencoded({extended : true })); 
 
 require("./middlewares/passport")(passport); // User Router Middleware
 
 
 app.use("/api/users", require("./routes/users"));
+app.use("/api/products", require("./routes/products"));
 
 var startApp = function startApp() {
   return regeneratorRuntime.async(function startApp$(_context) {
