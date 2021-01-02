@@ -1,0 +1,46 @@
+@import url("https://fonts.googleapis.com/css2?family=Quicksand&display=swap");
+.info {
+  padding: 0px 150px;
+}
+.info .spliter {
+  margin-top: 20px;
+  display: flex;
+  justify-content: space-around;
+  align-items: flex-start;
+}
+.info .spliter .space {
+  margin-bottom: 30px;
+}
+.info .spliter .left {
+  width: 100%;
+  padding: 20px;
+  padding-top: 0px;
+  padding-right: 50px;
+}
+.info .spliter .left h2 {
+  margin-bottom: 10px;
+  font-family: "Quicksand medium", sans-serif;
+  font-size: 18px;
+  color: #000;
+}
+.info .spliter .left p {
+  font-family: "Quicksand regular", sans-serif;
+  font-size: 14px;
+  color: #6a737d;
+}
+.info .spliter .right {
+  position: relative;
+  width: 60%;
+  height: 100%;
+  padding: 20px;
+}
+.info .spliter .right img {
+  border: 10px solid #5C12A6;
+  box-shadow: 0px 0px 15px 0px rgba(0, 0, 0, 0.15);
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+}

@@ -35,8 +35,7 @@ var fetchProducts = function fetchProducts(req, res) {
               success: true
             });else {
               res.status(200).json({
-                prod: prod,
-                success: true
+                prod: prod
               });
             }
           } else {
@@ -54,23 +53,66 @@ var fetchProducts = function fetchProducts(req, res) {
   });
 };
 /**
+ * @DESC To get product by id
+ */
+
+
+var fetchProductById = function fetchProductById(req, res) {
+  var id, prod;
+  return regeneratorRuntime.async(function fetchProductById$(_context2) {
+    while (1) {
+      switch (_context2.prev = _context2.next) {
+        case 0:
+          id = req.params.id;
+          _context2.next = 3;
+          return regeneratorRuntime.awrap(Product.findOne({
+            _id: id
+          }));
+
+        case 3:
+          prod = _context2.sent;
+
+          if (prod) {
+            if (prod.length == 0) res.status(200).json({
+              message: "No Products",
+              success: true
+            });else {
+              res.status(200).send(prod);
+            }
+          } else {
+            res.status(400).json({
+              prod: prod,
+              message: "couldn't find any product",
+              id: req.id,
+              success: false
+            });
+          }
+
+        case 5:
+        case "end":
+          return _context2.stop();
+      }
+    }
+  });
+};
+/**
  * @DESC To get all products in stock
  */
 
 
 var fetchInStockProducts = function fetchInStockProducts(req, res) {
   var prod;
-  return regeneratorRuntime.async(function fetchInStockProducts$(_context2) {
+  return regeneratorRuntime.async(function fetchInStockProducts$(_context3) {
     while (1) {
-      switch (_context2.prev = _context2.next) {
+      switch (_context3.prev = _context3.next) {
         case 0:
-          _context2.next = 2;
+          _context3.next = 2;
           return regeneratorRuntime.awrap(Product.find({
             status: "In Stock"
           }));
 
         case 2:
-          prod = _context2.sent;
+          prod = _context3.sent;
 
           if (prod) {
             if (prod.length == 0) res.status(200).json({
@@ -91,7 +133,7 @@ var fetchInStockProducts = function fetchInStockProducts(req, res) {
 
         case 4:
         case "end":
-          return _context2.stop();
+          return _context3.stop();
       }
     }
   });
@@ -103,17 +145,17 @@ var fetchInStockProducts = function fetchInStockProducts(req, res) {
 
 var fetchOutOfStockProducts = function fetchOutOfStockProducts(req, res) {
   var prod;
-  return regeneratorRuntime.async(function fetchOutOfStockProducts$(_context3) {
+  return regeneratorRuntime.async(function fetchOutOfStockProducts$(_context4) {
     while (1) {
-      switch (_context3.prev = _context3.next) {
+      switch (_context4.prev = _context4.next) {
         case 0:
-          _context3.next = 2;
+          _context4.next = 2;
           return regeneratorRuntime.awrap(Product.find({
             status: "Out Of Stock"
           }));
 
         case 2:
-          prod = _context3.sent;
+          prod = _context4.sent;
 
           if (prod) {
             if (prod.length == 0) res.status(200).json({
@@ -134,7 +176,7 @@ var fetchOutOfStockProducts = function fetchOutOfStockProducts(req, res) {
 
         case 4:
         case "end":
-          return _context3.stop();
+          return _context4.stop();
       }
     }
   });
@@ -146,17 +188,17 @@ var fetchOutOfStockProducts = function fetchOutOfStockProducts(req, res) {
 
 var fetchLowStockProducts = function fetchLowStockProducts(req, res) {
   var prod;
-  return regeneratorRuntime.async(function fetchLowStockProducts$(_context4) {
+  return regeneratorRuntime.async(function fetchLowStockProducts$(_context5) {
     while (1) {
-      switch (_context4.prev = _context4.next) {
+      switch (_context5.prev = _context5.next) {
         case 0:
-          _context4.next = 2;
+          _context5.next = 2;
           return regeneratorRuntime.awrap(Product.find({
             status: "Low On Stock"
           }));
 
         case 2:
-          prod = _context4.sent;
+          prod = _context5.sent;
 
           if (prod) {
             if (prod.length == 0) res.status(200).json({
@@ -177,7 +219,7 @@ var fetchLowStockProducts = function fetchLowStockProducts(req, res) {
 
         case 4:
         case "end":
-          return _context4.stop();
+          return _context5.stop();
       }
     }
   });
@@ -189,12 +231,13 @@ var fetchLowStockProducts = function fetchLowStockProducts(req, res) {
 
 var editProduct = function editProduct(req, res) {
   var id, prod;
-  return regeneratorRuntime.async(function editProduct$(_context5) {
+  return regeneratorRuntime.async(function editProduct$(_context6) {
     while (1) {
-      switch (_context5.prev = _context5.next) {
+      switch (_context6.prev = _context6.next) {
         case 0:
-          id = req.params.id;
-          _context5.next = 3;
+          id = req.params.id; //update product
+
+          _context6.next = 3;
           return regeneratorRuntime.awrap(Product.findOne({
             _id: id
           }, function (err, foundObject) {
@@ -230,12 +273,12 @@ var editProduct = function editProduct(req, res) {
                   foundObject.description = req.body.description;
                 }
 
-                if (req.body.image) {
-                  foundObject.image = req.body.image;
+                if (req.body.images) {
+                  foundObject.images = req.body.images;
                 }
 
-                if (req.body.internal_information) {
-                  foundObject.internal_information = req.body.internal_information;
+                if (req.body.info) {
+                  foundObject.internal_information = req.body.info;
                 }
 
                 if (req.body.status) {
@@ -260,11 +303,11 @@ var editProduct = function editProduct(req, res) {
           }));
 
         case 3:
-          prod = _context5.sent;
+          prod = _context6.sent;
 
         case 4:
         case "end":
-          return _context5.stop();
+          return _context6.stop();
       }
     }
   });
@@ -276,9 +319,9 @@ var editProduct = function editProduct(req, res) {
 
 var addProduct = function addProduct(req, res) {
   var prod;
-  return regeneratorRuntime.async(function addProduct$(_context6) {
+  return regeneratorRuntime.async(function addProduct$(_context7) {
     while (1) {
-      switch (_context6.prev = _context6.next) {
+      switch (_context7.prev = _context7.next) {
         case 0:
           prod = new Product({
             name: req.body.name,
@@ -290,18 +333,18 @@ var addProduct = function addProduct(req, res) {
             status: req.body.status,
             internal_information: req.body.internal_information
           });
-          _context6.next = 3;
+          _context7.next = 3;
           return regeneratorRuntime.awrap(prod.save());
 
         case 3:
-          return _context6.abrupt("return", res.status(201).json({
+          return _context7.abrupt("return", res.status(201).json({
             message: "Product has been added.",
             success: true
           }));
 
         case 4:
         case "end":
-          return _context6.stop();
+          return _context7.stop();
       }
     }
   });
@@ -313,5 +356,6 @@ module.exports = {
   fetchOutOfStockProducts: fetchOutOfStockProducts,
   fetchLowStockProducts: fetchLowStockProducts,
   editProduct: editProduct,
-  addProduct: addProduct
+  addProduct: addProduct,
+  fetchProductById: fetchProductById
 };

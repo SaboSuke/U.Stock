@@ -1,0 +1,74 @@
+@import url("https://fonts.googleapis.com/css2?family=Quicksand&display=swap");
+.spliter {
+  padding: 0 150px;
+  width: 100%;
+  display: flex;
+  align-content: center;
+  align-items: flex-start;
+}
+.spliter .left {
+  margin-right: 100px;
+}
+.spliter .left .preview_image {
+  height: 320px;
+  width: 280px;
+}
+.spliter .left .preview_image img {
+  width: 100%;
+  height: 100%;
+}
+.spliter .left .other_images {
+  margin-top: 20px;
+  width: 280px;
+  display: flex;
+  justify-content: space-evenly;
+}
+.spliter .left .other_images .image_box {
+  height: 70px;
+  width: 60px;
+}
+.spliter .left .other_images .image_box img {
+  width: 100%;
+  height: 100%;
+}
+.spliter .right .title {
+  font-family: "Quicksand medium", sans-serif;
+  font-size: 18px;
+  color: #000;
+  margin-bottom: 15px;
+}
+.spliter .right .description {
+  font-family: "Quicksand regular", sans-serif;
+  font-size: 13px;
+  color: #6a737d;
+}
+.spliter .right .price {
+  margin-top: 15px;
+  font-family: "Quicksand medium", sans-serif;
+  font-size: 16px;
+  color: #C004D9;
+}
+.spliter .right .status {
+  font-family: "Quicksand medium", sans-serif;
+  font-size: 12px;
+  margin-bottom: 15px;
+}
+.spliter .right .status.In {
+  color: #39b54a;
+}
+.spliter .right .status.Out {
+  color: #ed1c24;
+}
+.spliter .right .status.Low {
+  color: #fbb03b;
+}
+.spliter .right .trouble p {
+  margin-bottom: 15px;
+}
+.spliter .right .trouble a {
+  font-family: "Quicksand medium", sans-serif;
+  font-size: 12px;
+  margin-top: 20px;
+  color: #7F25D9;
+  text-decoration: underline;
+}

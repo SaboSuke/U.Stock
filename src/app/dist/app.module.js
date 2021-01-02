@@ -30,13 +30,30 @@ var statistics_component_1 = require("./dashboard/statistics/statistics.componen
 var product_list_component_1 = require("./dashboard/product-list/product-list.component");
 var edit_product_component_1 = require("./dashboard/edit-product/edit-product.component");
 var settings_component_1 = require("./dashboard/settings/settings.component");
+var all_component_1 = require("./dashboard/product-list/all/all.component");
+var in_stock_component_1 = require("./dashboard/product-list/in-stock/in-stock.component");
+var out_of_stock_component_1 = require("./dashboard/product-list/out-of-stock/out-of-stock.component");
+var low_on_stock_component_1 = require("./dashboard/product-list/low-on-stock/low-on-stock.component");
+var product_view_component_1 = require("./dashboard/product-view/product-view.component");
+var overview_component_1 = require("./dashboard/product-view/overview/overview.component");
+var edit_component_1 = require("./dashboard/product-view/edit/edit.component");
+var other_information_component_1 = require("./dashboard/product-view/other-information/other-information.component");
 exports.routes = [
     { path: '', redirectTo: '/login', pathMatch: 'full' },
     { path: 'login', component: login_component_1.LoginComponent, pathMatch: 'full' },
     { path: 'dashboard/home', component: dashboard_component_1.DashboardComponent },
-    { path: 'dashboard/list', component: product_list_component_1.ProductListComponent },
+    {
+        path: 'dashboard/list',
+        component: product_list_component_1.ProductListComponent
+    },
+    { path: 'dashboard/list/all', component: all_component_1.AllComponent },
+    { path: 'dashboard/list/in-stock', component: in_stock_component_1.InStockComponent },
+    { path: 'low-on-stock', component: low_on_stock_component_1.LowOnStockComponent },
+    { path: 'out-of-stock', component: out_of_stock_component_1.OutOfStockComponent },
     { path: 'dashboard/edit', component: edit_product_component_1.EditProductComponent },
+    { path: 'dashboard/product/:id/overview', component: product_view_component_1.ProductViewComponent },
     { path: 'dashboard/settings', component: settings_component_1.SettingsComponent },
+    { path: 'dashboard/product/:id', component: product_list_component_1.ProductListComponent },
 ];
 var AppModule = /** @class */ (function () {
     function AppModule() {
@@ -48,7 +65,7 @@ var AppModule = /** @class */ (function () {
                 dashboard_component_1.DashboardComponent,
                 sidebar_component_1.SidebarComponent,
                 topbar_component_1.TopbarComponent,
-                //StatisticsComponent,
+                statistics_component_1.StatisticsComponent,
                 product_stats_component_1.ProductStatsComponent,
                 profile_section_component_1.ProfileSectionComponent,
                 last_product_component_1.LastProductComponent,
@@ -57,7 +74,15 @@ var AppModule = /** @class */ (function () {
                 statistics_component_1.StatisticsComponent,
                 product_list_component_1.ProductListComponent,
                 edit_product_component_1.EditProductComponent,
-                settings_component_1.SettingsComponent
+                settings_component_1.SettingsComponent,
+                all_component_1.AllComponent,
+                in_stock_component_1.InStockComponent,
+                out_of_stock_component_1.OutOfStockComponent,
+                low_on_stock_component_1.LowOnStockComponent,
+                product_view_component_1.ProductViewComponent,
+                overview_component_1.OverviewComponent,
+                edit_component_1.EditComponent,
+                other_information_component_1.OtherInformationComponent
             ],
             imports: [
                 platform_browser_1.BrowserModule,

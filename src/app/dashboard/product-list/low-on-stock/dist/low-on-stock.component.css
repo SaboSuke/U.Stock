@@ -1,0 +1,198 @@
+@import url("https://fonts.googleapis.com/css2?family=Quicksand&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Quicksand&display=swap");
+div {
+  width: 95%;
+  margin: 0 auto;
+  display: flex;
+}
+
+.wrapper {
+  width: 80%;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  margin-top: 20px;
+}
+
+a {
+  text-decoration: none;
+}
+
+.nav {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  margin-bottom: 20px;
+}
+.nav #inner_nav {
+  place-self: center;
+  width: 70%;
+  display: flex;
+  justify-content: flex-start;
+  list-style-type: none;
+}
+.nav #inner_nav li {
+  margin-right: 50px;
+}
+.nav #inner_nav li a {
+  color: #6a737d;
+  font-family: "Quicksand medium", sans-serif;
+  font-size: 16px;
+}
+.nav #inner_nav li a:hover {
+  color: #000;
+}
+.nav #inner_nav li.active a {
+  color: #000;
+  border-bottom: 2px solid #C004D9;
+}
+.nav .add_product {
+  color: #fff;
+  background: #C004D9;
+  border: 1px solid transparent;
+  padding: 12px 15px;
+  border-radius: 15px;
+  align-self: center;
+}
+.nav .add_product:hover {
+  color: #C004D9;
+  border: 1px solid #C004D9;
+  background: transparent;
+}
+
+.interface {
+  background: #fff;
+  width: 100%;
+  height: 465px;
+  border-radius: 20px;
+  padding: 50px 20px 50px 0px;
+}
+.interface .inner-wrapper {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  overflow-y: scroll;
+}
+.interface .inner-wrapper .product {
+  height: 65px;
+  width: 90%;
+  padding: 10px;
+  margin: 0 auto;
+  margin-bottom: 30px;
+  place-items: center;
+}
+.interface .inner-wrapper .product:hover {
+  background: #f2f2f2;
+  cursor: pointer;
+  border-radius: 5px;
+}
+.interface .inner-wrapper .product > div {
+  margin-right: 20px;
+}
+.interface .inner-wrapper .product > div:first-child {
+  background: red;
+  height: 100%;
+  width: 250px;
+}
+.interface .inner-wrapper .product .title {
+  display: flex;
+  flex-direction: column;
+}
+.interface .inner-wrapper .product .title p:first-child {
+  font-size: 14px;
+  color: #000;
+  text-transform: capitalize;
+  font-family: "Quicksand medium", sans-serif;
+}
+.interface .inner-wrapper .product .title span {
+  font-size: 12px;
+  color: #6a737d !important;
+  font-family: "Quicksand medium", sans-serif;
+}
+.interface .inner-wrapper .product .intersect p {
+  font-size: 12px;
+  color: #6a737d !important;
+  font-family: "Quicksand medium", sans-serif;
+}
+.interface .inner-wrapper .product .intersect p span {
+  font-size: 12px;
+  color: #000 !important;
+  font-family: "Quicksand medium", sans-serif;
+}
+.interface .inner-wrapper .product .status p.Low {
+  font-size: 12px;
+  font-family: "Quicksand medium", sans-serif;
+  color: #fbb03b;
+}
+.interface .inner-wrapper .product .status p.In {
+  font-size: 12px;
+  font-family: "Quicksand medium", sans-serif;
+  color: #39b54a;
+}
+.interface .inner-wrapper .product .status p.Out {
+  font-size: 12px;
+  font-family: "Quicksand medium", sans-serif;
+  color: #ed1c24;
+}
+
+.product {
+  height: 65px;
+  width: 90%;
+  padding: 10px;
+  margin: 0 auto;
+  margin-bottom: 30px;
+  place-items: center;
+}
+.product:hover {
+  background: #f2f2f2;
+  cursor: pointer;
+  border-radius: 5px;
+}
+.product > div {
+  margin-right: 20px;
+}
+.product > div:first-child {
+  background: red;
+  height: 100%;
+  width: 250px;
+}
+.product .title {
+  display: flex;
+  flex-direction: column;
+}
+.product .title p:first-child {
+  font-size: 14px;
+  color: #000;
+  text-transform: capitalize;
+  font-family: "Quicksand medium", sans-serif;
+}
+.product .title span {
+  font-size: 12px;
+  color: #6a737d !important;
+  font-family: "Quicksand medium", sans-serif;
+}
+.product .intersect p {
+  font-size: 12px;
+  color: #6a737d !important;
+  font-family: "Quicksand medium", sans-serif;
+}
+.product .intersect p span {
+  font-size: 12px;
+  color: #000 !important;
+  font-family: "Quicksand medium", sans-serif;
+}
+.product .status p.Low {
+  font-size: 12px;
+  font-family: "Quicksand medium", sans-serif;
+  color: #fbb03b;
+}
+.product .status p.In {
+  font-size: 12px;
+  font-family: "Quicksand medium", sans-serif;
+  color: #39b54a;
+}
+.product .status p.Out {
+  font-size: 12px;
+  font-family: "Quicksand medium", sans-serif;
+  color: #ed1c24;
+}

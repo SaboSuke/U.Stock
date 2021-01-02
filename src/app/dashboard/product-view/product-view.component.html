@@ -1,0 +1,31 @@
+
+<app-topbar></app-topbar>
+<div>
+    <app-sidebar></app-sidebar>
+    <div class="wrapper">
+        <div class="nav">
+            <ul id="inner_nav">
+                <li class="is active" (click)="change($event, 1)">
+                    <a >Overview</a>
+                </li>
+                <li class="los" (click)="change($event, 2)">
+                    <a >Edit</a>
+                </li>
+                <li class="oos" (click)="change($event, 3)">
+                    <a >Other Information</a>
+                </li>
+            </ul>
+        </div>
+        <div class="interface" >
+            <div class="inner-wrapper">
+                <app-overview *ngIf="changeindex == 1"></app-overview>
+                <app-edit *ngIf="changeindex == 2"></app-edit>
+                <app-other-information *ngIf="changeindex == 3"></app-other-information>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="chat_bot">
+    <app-chatbot></app-chatbot>
+</div>

@@ -1,0 +1,61 @@
+@import '../../../../_variables.sass'
+
+.spliter
+    padding: 0 150px
+    width: 100%
+    display: flex
+    align-content: center
+    align-items: flex-start
+    .left
+        margin-right: 100px
+        .preview_image 
+            height: 320px
+            width: 280px
+            img
+                width: 100%
+                height: 100%
+        .other_images 
+            margin-top: 20px
+            width: 280px
+            display: flex
+            justify-content: space-evenly
+            .image_box
+                height: 70px
+                width: 60px
+                img
+                    width: 100%
+                    height: 100%
+    .right 
+        .title
+            font-family: 'Quicksand medium', sans-serif
+            font-size: 18px
+            color: $black
+            margin-bottom: 15px 
+        .description
+            font-family: 'Quicksand regular', sans-serif
+            font-size: 13px
+            color: $lowerPriority 
+        .price
+            margin-top: 15px
+            font-family: 'Quicksand medium', sans-serif
+            font-size: 16px
+            color: $secondary
+        .status 
+            font-family: 'Quicksand medium', sans-serif
+            font-size: 12px
+            margin-bottom: 15px
+        .status.In
+            color: $green 
+        .status.Out
+            color: $red
+        .status.Low
+            color: $yellow
+        .trouble 
+            p
+                margin-bottom: 15px
+            a 
+                font-family: 'Quicksand medium', sans-serif
+                font-size: 12px
+                margin-top: 20px
+                color: $primaryLighter
+                text-decoration: underline

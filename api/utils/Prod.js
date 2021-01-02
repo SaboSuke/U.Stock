@@ -19,12 +19,36 @@ const fetchProducts = async (req, res) => {
     else {
       res.status(200).json({
         prod,
-        success: true,
       });
     }
   } else {
     res.status(400).json({
       message: "couldn't find any product",
+      success: false,
+    });
+  }
+};
+
+/**
+ * @DESC To get product by id
+ */
+const fetchProductById = async (req, res) => {
+  const id = req.params.id;
+  const prod = await Product.findOne({ _id: id });
+  if (prod) {
+    if (prod.length == 0)
+      res.status(200).json({
+        message: "No Products",
+        success: true,
+      });
+    else {
+      res.status(200).send(prod);
+    }
+  } else {
+    res.status(400).json({
+      prod,
+      message: "couldn't find any product",
+      id: req.id,
       success: false,
     });
   }
@@ -110,6 +134,8 @@ const fetchLowStockProducts = async (req, res) => {
  */
 const editProduct = async (req, res) => {
   const id = req.params.id;
+
+  //update product
   const prod = await Product.findOne({ _id: id }, (err, foundObject) => {
     if (err) {
       res.status(500).json({
@@ -138,11 +164,11 @@ const editProduct = async (req, res) => {
         if (req.body.description) {
           foundObject.description = req.body.description;
         }
-        if (req.body.image) {
-          foundObject.image = req.body.image;
+        if (req.body.images) {
+          foundObject.images = req.body.images;
         }
-        if (req.body.internal_information) {
-          foundObject.internal_information = req.body.internal_information;
+        if (req.body.info) {
+          foundObject.internal_information = req.body.info;
         }
         if (req.body.status) {
           foundObject.status = req.body.status;
@@ -164,6 +190,7 @@ const editProduct = async (req, res) => {
     }
   });
 };
+
 
 /**
  * @DESC To add a product
@@ -194,4 +221,5 @@ module.exports = {
   fetchLowStockProducts,
   editProduct,
   addProduct,
+  fetchProductById,
 };

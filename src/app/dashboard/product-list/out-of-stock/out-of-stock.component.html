@@ -1,0 +1,29 @@
+<div *ngFor="let prod of products.prod">
+    <div class="product">
+        <div>
+            <img src="../../../../assets/product/{{prod.images[0]}}" alt="product image">
+        </div>
+        <div class="title">
+            <p>{{prod.name}}</p>
+            <span> {{prod.description | slice:0:20}}... </span>
+        </div>
+        <div class="code intersect">
+            <p>
+                <span>code</span>
+                {{prod.code}}
+            </p>
+        </div>
+        <div class="quantity intersect">
+            <p>
+                <span>Quantity</span>
+                {{prod.quantity}}
+            </p>
+        </div>
+        <div class="price intersect">
+            <p>
+                <span>Price</span>
+                {{prod.price}}
+            </p>
+        </div>
+    </div>
+</div>

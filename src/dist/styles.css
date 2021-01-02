@@ -13,6 +13,7 @@ html {
 
 body {
   background-color: #f2f2f2;
+  overflow-y: hidden;
 }
 
 /* width */
@@ -35,4 +36,52 @@ body {
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
   background: #7F25D9;
+}
+
+/* Global */
+a {
+  cursor: pointer;
+}
+
+.btn {
+  padding: 10px 15px;
+  border-radius: 10px;
+  font-family: "Quicksand medium", sans-serif;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.btn-primary {
+  background: #2F0459;
+  color: white;
+  border: 1px solid transparent;
+  transition: 0.3s all ease-in-out;
+}
+.btn-primary:hover {
+  background: white;
+  color: #2F0459;
+  border: 1px solid #2F0459;
+  transition: 0.3s all ease-in-out;
+}
+
+.btn-secondary {
+  background: #C004D9;
+  color: white;
+  border: 1px solid transparent;
+  transition: 0.3s all ease-in-out;
+}
+.btn-secondary:hover {
+  background: white;
+  color: #C004D9;
+  border: 1px solid #C004D9;
+  transition: 0.3s all ease-in-out;
+}
+
+input, textarea {
+  resize: none;
+  background: #f2f2f2;
+  border: 1px solid transparent;
+  border-radius: 10px;
+  padding: 10px;
+  padding-left: 15px;
 }

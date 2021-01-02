@@ -1,3 +1,4 @@
+@import url("https://fonts.googleapis.com/css2?family=Quicksand&display=swap");
 div {
   width: 95%;
   margin: 0 auto;
@@ -8,4 +9,91 @@ div {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
+}
+
+.inner-wrapper {
+  height: 100vh;
+  width: 100%;
+  background: white;
+  margin-left: 50px;
+  margin-top: 20px;
+  border-radius: 20px;
+  padding: 0px 100px;
+}
+.inner-wrapper .avatar a {
+  font-size: 14px;
+  font-family: "Quicksand bold", sans-serif;
+}
+.inner-wrapper .avatar a:hover {
+  color: #C004D9;
+  cursor: pionter;
+}
+.inner-wrapper img {
+  width: 100px;
+  height: 100px;
+  border-radius: 50px;
+}
+.inner-wrapper .spliter {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: space-evenly;
+}
+.inner-wrapper .spliter .right {
+  width: 80%;
+  margin-top: 50px;
+}
+.inner-wrapper .spliter .right img {
+  width: 100px;
+  height: 100px;
+  border-radius: 50px;
+  box-shadow: 0px 0px 15px 2px rgba(0, 0, 0, 0.25);
+  margin-bottom: 80px;
+}
+.inner-wrapper .spliter .right .column {
+  width: 100%;
+}
+.inner-wrapper .spliter .right .column .input-group {
+  margin-right: 50px;
+}
+.inner-wrapper .spliter .right .input-group {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-bottom: 20px;
+}
+.inner-wrapper .spliter .right h2 {
+  font-family: "Quicksand regular", sans-serif;
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+.inner-wrapper .spliter .left {
+  display: flex;
+  flex-direction: column;
+  place-self: center;
+  background: #f2f2f2;
+  height: 100%;
+  width: 60%;
+  margin-right: 150px;
+}
+.inner-wrapper .spliter .left img {
+  margin: 0 auto;
+  margin-top: 50px;
+  box-shadow: 0px 0px 15px 2px rgba(0, 0, 0, 0.25);
+}
+.inner-wrapper .spliter .left .content {
+  margin: 0 auto;
+  margin-top: 80px;
+  display: inline;
+  text-align: center;
+}
+.inner-wrapper .spliter .left .content h2 {
+  font-family: "Quicksand bold", sans-serif;
+  font-size: 26px;
+}
+.inner-wrapper .spliter .left .content p {
+  color: #3d3f42;
+  font-family: "Quicksand regular", sans-serif;
+  font-size: 16px;
 }

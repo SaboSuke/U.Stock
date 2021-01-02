@@ -22,14 +22,31 @@ import { StatisticsComponent } from './dashboard/statistics/statistics.component
 import { ProductListComponent } from './dashboard/product-list/product-list.component';
 import { EditProductComponent } from './dashboard/edit-product/edit-product.component';
 import { SettingsComponent } from './dashboard/settings/settings.component';
+import { AllComponent } from './dashboard/product-list/all/all.component';
+import { InStockComponent } from './dashboard/product-list/in-stock/in-stock.component';
+import { OutOfStockComponent } from './dashboard/product-list/out-of-stock/out-of-stock.component';
+import { LowOnStockComponent } from './dashboard/product-list/low-on-stock/low-on-stock.component';
+import { ProductViewComponent } from './dashboard/product-view/product-view.component';
+import { OverviewComponent } from './dashboard/product-view/overview/overview.component';
+import { EditComponent } from './dashboard/product-view/edit/edit.component';
+import { OtherInformationComponent } from './dashboard/product-view/other-information/other-information.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
   { path: 'login', component: LoginComponent, pathMatch: 'full' },
   { path: 'dashboard/home', component: DashboardComponent},
-  { path: 'dashboard/list', component: ProductListComponent},
+  { 
+    path: 'dashboard/list', 
+    component: ProductListComponent,
+  },
+  { path: 'dashboard/list/all', component: AllComponent },
+  { path: 'dashboard/list/in-stock', component: InStockComponent },
+  { path: 'low-on-stock', component: LowOnStockComponent },
+  { path: 'out-of-stock', component: OutOfStockComponent },
   { path: 'dashboard/edit', component: EditProductComponent},
+  { path: 'dashboard/product/:id/overview', component: ProductViewComponent},
   { path: 'dashboard/settings', component: SettingsComponent},
+  { path: 'dashboard/product/:id', component: ProductListComponent},
 ]
 
 @NgModule({
@@ -38,7 +55,7 @@ export const routes: Routes = [
     DashboardComponent,
     SidebarComponent,
     TopbarComponent,
-    //StatisticsComponent,
+    StatisticsComponent,
     ProductStatsComponent,
     ProfileSectionComponent,
     LastProductComponent,
@@ -47,7 +64,15 @@ export const routes: Routes = [
     StatisticsComponent,
     ProductListComponent,
     EditProductComponent,
-    SettingsComponent
+    SettingsComponent,
+    AllComponent,
+    InStockComponent,
+    OutOfStockComponent,
+    LowOnStockComponent,
+    ProductViewComponent,
+    OverviewComponent,
+    EditComponent,
+    OtherInformationComponent
   ],
   imports: [
     BrowserModule,

@@ -117,44 +117,28 @@ var updateProfile = function updateProfile(req, res) {
                   success: false
                 });
               } else {
-                if (req.body.address) {
-                  foundObject.address = req.body.address;
+                if (req.body.avatar) {
+                  foundObject.avatar = req.body.avatar;
                 }
 
                 if (req.body.name) {
                   foundObject.name = req.body.name;
                 }
 
+                if (req.body.last_name) {
+                  foundObject.last_name = req.body.last_name;
+                }
+
                 if (req.body.email) {
                   foundObject.email = req.body.email;
-                }
-
-                if (req.body.password) {
-                  foundObject.password = req.body.password;
-                }
-
-                if (req.body.birthday) {
-                  foundObject.birthday = req.body.birthday;
-                }
-
-                if (req.body.sex) {
-                  foundObject.sex = req.body.sex;
-                }
-
-                if (req.body.phone) {
-                  foundObject.phone = req.body.phone;
-                }
-
-                if (req.body.city) {
-                  foundObject.city = req.body.city;
                 }
 
                 if (req.body.address) {
                   foundObject.address = req.body.address;
                 }
 
-                if (req.body.avatar) {
-                  foundObject.avatar = req.body.avatar;
+                if (req.body.password) {
+                  foundObject.password = req.body.password;
                 }
 
                 foundObject.save(function (err) {

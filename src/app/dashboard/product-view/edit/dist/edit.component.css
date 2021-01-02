@@ -1,0 +1,71 @@
+@import url("https://fonts.googleapis.com/css2?family=Quicksand&display=swap");
+.spliter {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  padding: 0px 100px;
+}
+.spliter .left {
+  width: 100%;
+  margin-right: 100px;
+}
+.spliter .left .images {
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+  margin-bottom: 20px;
+}
+.spliter .left .images .image_box {
+  margin-right: 20px;
+  width: 50px;
+  height: 60px;
+}
+.spliter .left .images img {
+  width: 100%;
+  height: 100%;
+}
+.spliter .left .images .add {
+  cursor: pointer;
+  border: 2px dashed #000;
+  text-align: center;
+}
+.spliter .left .images .add:hover {
+  border-color: #C004D9;
+}
+.spliter .left .images .add:hover span {
+  color: #C004D9;
+}
+.spliter .left .images .add span {
+  font-size: 38px;
+  font-family: "Quicksand regular", sans-serif;
+  margin-top: 10px;
+}
+.spliter .left .column {
+  width: 100%;
+  display: flex;
+}
+.spliter .left .column .input-group {
+  margin-right: 20px;
+}
+
+.input-group {
+  margin-bottom: 20px;
+}
+
+h2 {
+  font-size: 18px;
+  font-family: "Quicksand medium", sans-serif;
+  margin-bottom: 10px;
+}
+
+textarea {
+  width: 340px;
+  height: 150px;
+  margin-bottom: 20px;
+}
+textarea .right {
+  align-self: flex-start;
+  width: 100%;
+}
