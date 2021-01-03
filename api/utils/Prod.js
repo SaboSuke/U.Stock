@@ -30,6 +30,28 @@ const fetchProducts = async (req, res) => {
 };
 
 /**
+ * @DESC To get last inserted product
+ */
+const getLastInsertedProduct = async (req, res) => {
+  const prod = await Product.find({}).sort({_id: -1}).limit(1)
+  if (prod) {
+    if (prod.length == 0)
+      res.status(400).json({
+        message: "No Products Were Found",
+        success: true,
+      });
+    else {
+      res.status(200).send(prod)
+    }
+  } else {
+    res.status(400).json({
+      message: "couldn't find any product",
+      success: false,
+    });
+  }
+};
+
+/**
  * @DESC To get product by id
  */
 const fetchProductById = async (req, res) => {
@@ -37,7 +59,7 @@ const fetchProductById = async (req, res) => {
   const prod = await Product.findOne({ _id: id });
   if (prod) {
     if (prod.length == 0)
-      res.status(200).json({
+      res.status(400).json({
         message: "No Products",
         success: true,
       });
@@ -46,9 +68,7 @@ const fetchProductById = async (req, res) => {
     }
   } else {
     res.status(400).json({
-      prod,
       message: "couldn't find any product",
-      id: req.id,
       success: false,
     });
   }
@@ -111,10 +131,10 @@ const fetchLowStockProducts = async (req, res) => {
   const prod = await Product.find({ status: "Low On Stock" });
   if (prod) {
     if (prod.length == 0)
-      res.status(200).json({
-        message: "No Products Low On Stock",
-        success: true,
-      });
+    res.status(200).json({
+      message: "No Products Low On Stock",
+      success: true,
+    });
     else {
       res.status(200).json({
         prod,
@@ -128,6 +148,159 @@ const fetchLowStockProducts = async (req, res) => {
     });
   }
 };
+
+/**
+ * @DESC To count all products
+ */
+const countProducts = async (req, res) => {
+  const prod = await Product.find().countDocuments((err, result)=>{
+    if (err) 
+      return  res.send("error trying to count all products");
+    if(result)
+      response =  {
+        status: 'success',
+        data: result
+      }
+    else
+      response = {
+        status: 'fail',
+        data: []
+      }
+    return response;
+  });
+  if (prod) {
+    if (prod.length == 0)
+      res.status(200).json({
+        message: "No Products",
+        success: true,
+      });
+    else {
+      res.status(200).json({
+        count: prod,
+      });
+    }
+  } else {
+    res.status(400).json({
+      message: "couldn't find any product ",
+      success: false,
+    });
+  }
+};
+
+/**
+ * @DESC To count all products in stock
+ */
+const countInStockProducts = async (req, res) => {
+  const prod = await Product.find({ status: "In Stock" }).countDocuments((err, result)=>{
+    if (err) 
+      return  res.send("error trying to count products in stock");
+    if(result)
+      response =  {
+        status: 'success',
+        data: result
+      }
+    else
+      response = {
+        status: 'fail',
+        data: []
+      }
+    return response;
+  });
+  if (prod) {
+    if (prod.length == 0)
+      res.status(200).json({
+        message: "No Products in Stock",
+        success: true,
+      });
+    else {
+      res.status(200).json({
+        count: prod,
+      });
+    }
+  } else {
+    res.status(400).json({
+      message: "couldn't find any product in stock ",
+      success: false,
+    });
+  }
+};
+
+/**
+ * @DESC To count all products low on stock
+ */
+const countLowOnStockProducts = async (req, res) => {
+  const prod = await Product.find({ status: "Low On Stock" }).countDocuments((err, result)=>{
+    if (err) 
+      return  res.send("error trying to count products low on stock");
+    if(result)
+      response =  {
+        status: 'success',
+        data: result
+      }
+    else
+      response = {
+        status: 'fail',
+        data: []
+      }
+    return response;
+  });
+  if (prod) {
+    if (prod.length == 0)
+      res.status(200).json({
+        message: "No Products Low On Stock",
+        success: true,
+      });
+    else {
+      res.status(200).json({
+        count: prod,
+      });
+    }
+  } else {
+    res.status(400).json({
+      message: "couldn't find any product low on  stock ",
+      success: false,
+    });
+  }
+};
+
+/**
+ * @DESC To count all products out of stock
+ */
+const countOutOfStockProducts = async (req, res) => {
+  const prod = await Product.find({ status: "Out Of Stock" }).countDocuments((err, result)=>{
+    if (err) 
+      return  res.send("error trying to count products out of stock");
+    if(result)
+      response =  {
+        status: 'success',
+        data: result
+      }
+    else
+      response = {
+        status: 'fail',
+        data: []
+      }
+    return response;
+  });
+  if (prod) {
+    if (prod.length == 0)
+      res.status(200).json({
+        message: "No Products Out Of Stock",
+        success: true,
+      });
+    else {
+      res.status(200).json({
+        count: prod,
+      });
+    }
+  } else {
+    res.status(400).json({
+      message: "couldn't find any product out of stock ",
+      success: false,
+    });
+  }
+};
+
 
 /**
  * @DESC To edit a product
@@ -191,7 +364,6 @@ const editProduct = async (req, res) => {
   });
 };
 
-
 /**
  * @DESC To add a product
  */
@@ -222,4 +394,9 @@ module.exports = {
   editProduct,
   addProduct,
   fetchProductById,
+  countInStockProducts,
+  countLowOnStockProducts,
+  countOutOfStockProducts,
+  countProducts,
+  getLastInsertedProduct,
 };

@@ -6,7 +6,13 @@ const {
   userLogin,
   updateProfile,
   serializeUser,
+  getUserDetails,
 } = require("../utils/Auth");
+
+// user details Route
+router.get("/get-user-details/:id", async (req, res) => {
+  await getUserDetails(req, res);
+});
 
 // Admin Login Route
 router.post("/login", async (req, res) => {
@@ -19,13 +25,9 @@ router.get("/profile", userAuth, async (req, res) => {
 });
 
 // User, Admin and SuperAdmin Profile Update Route
-router.put(
-  "/edit-profile/:id",
-  userAuth,
-  async (req, res) => {
-    await updateProfile(req, res)
-  }
-);
+router.put("/edit-profile/:id", async (req, res) => {
+  await updateProfile(req, res);
+});
 
 
 module.exports = router;

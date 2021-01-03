@@ -9,11 +9,12 @@ exports.__esModule = true;
 exports.LoginComponent = void 0;
 var core_1 = require("@angular/core");
 var LoginComponent = /** @class */ (function () {
-    function LoginComponent(router, formBuilder, _site, _auth) {
+    function LoginComponent(router, formBuilder, _site, _auth, _storage) {
         this.router = router;
         this.formBuilder = formBuilder;
         this._site = _site;
         this._auth = _auth;
+        this._storage = _storage;
         this.checkoutForm = this.formBuilder.group({
             email: '',
             password: ''
@@ -27,9 +28,9 @@ var LoginComponent = /** @class */ (function () {
         //this.checkoutForm.reset();
         this._site.loginDashboard(customerData.email, customerData.password).subscribe(function (data) {
             if (data.success) {
-                console.log(data.message);
                 _this._auth.setLoggedIn(true);
                 _this._auth.setToken(data.token);
+                _this._storage.createItem('user_id', data.user_id);
                 if (_this._auth.isLoggedIn() == "true")
                     //this.router.navigateByUrl('/dashboard/home');
                     _this.router.navigate(['/dashboard/home']);

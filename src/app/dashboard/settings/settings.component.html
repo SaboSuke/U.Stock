@@ -14,7 +14,7 @@
                 </div>
 
                 <div class="right">
-                    <form [formGroup]="profileform" (ngSubmit)="UpdateProfile($event, profileform.value)">
+                    <form [formGroup]="profileform" *ngIf="profileform" (ngSubmit)="UpdateProfile($event, profileform.value)">
                         <div class="avatar">
                             <img src="../../../assets/avatar/avatar.jpg" alt="avatar picture">
                             <a>Edit</a>
@@ -39,11 +39,7 @@
                                 <input type="text" formControlName="address" id="address">
                             </div>
                         </div>
-                        <div class="input-group">
-                            <h2>Password</h2>
-                            <input type="password" formControlName="password" id="address">
-                        </div>
-                        <button type="button" class="btn btn-secondary"> Save </button>
+                        <button type="submit" class="btn btn-secondary"> Save </button>
                     </form>
                 </div>
             </div>

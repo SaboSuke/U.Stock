@@ -6,6 +6,33 @@ const { SECRET } = require("../config");
 const bp = require("body-parser");
 
 /**
+ * @DESC To get user by id
+ */
+const getUserDetails = async (req, res) => {
+    const id = req.params.id;
+    const user = await User.findOne({ _id: id });
+    if (user) {
+        if (user.length == 0)
+            res.status(200).json({
+            message: "No User",
+            success: true,
+            });
+        else {
+            res.status(200).send(user);
+        }
+    } else {
+        user.createdAt = "0";
+        console.log(user.createdAt)
+        res.status(400).json({
+            user,
+            message: "couldn't find any user with that id",
+            id: req.id,
+            success: false,
+        });
+    }
+};
+
+/**
  * @DESC To Login the user (ADMIN, SUPER_ADMIN, USER)
  */
 const userLogin = async(userCreds, res) => {
@@ -40,10 +67,11 @@ const userLogin = async(userCreds, res) => {
     };
 
     return res.status(200).json({
-        ...result,
-        message: "Hurray! You are now logged in.",
-        code: "SCS",
-        success: true,
+      ...result,
+      user_id: user.id,
+      message: "Hurray! You are now logged in.",
+      code: "SCS",
+      success: true,
     });
     } else {
     return res.status(403).json({
@@ -72,9 +100,6 @@ const updateProfile = async(req, res) => {
                     success: false
                 });
             } else {
-                if (req.body.avatar) {
-                  foundObject.avatar = req.body.avatar;
-                }
                 if (req.body.name) {
                     foundObject.name = req.body.name
                 }
@@ -86,9 +111,6 @@ const updateProfile = async(req, res) => {
                 }
                 if (req.body.address) {
                     foundObject.address = req.body.address
-                }
-                if (req.body.password) {
-                  foundObject.password = req.body.password;
                 }
                 foundObject.save(function(err) {
                     if (err) {
@@ -148,4 +170,5 @@ module.exports = {
   userLogin,
   updateProfile,
   serializeUser,
+  getUserDetails,
 };

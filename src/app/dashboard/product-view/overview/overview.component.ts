@@ -31,9 +31,6 @@ export class OverviewComponent implements OnInit {
   ngOnInit(): void {
     let id = this.route.snapshot.params.id;
     this._storage.createItem('id', id);
-    // this._storage.createItem('info', data.info);
-    // this._storage.createItem('quantity', data.quantity.toString());
-    // this._storage.createItem('code', data.code);
     this._product.getProductById(id).subscribe(
       (data: any)=>{
         console.log(data)

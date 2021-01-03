@@ -19,32 +19,77 @@ var _require = require("../config"),
 
 var bp = require("body-parser");
 /**
- * @DESC To Login the user (ADMIN, SUPER_ADMIN, USER)
+ * @DESC To get user by id
  */
 
 
-var userLogin = function userLogin(userCreds, res) {
-  var email, password, user, token, result;
-  return regeneratorRuntime.async(function userLogin$(_context) {
+var getUserDetails = function getUserDetails(req, res) {
+  var id, user;
+  return regeneratorRuntime.async(function getUserDetails$(_context) {
     while (1) {
       switch (_context.prev = _context.next) {
         case 0:
-          email = userCreds.email, password = userCreds.password; // First Check if the username is in the database
-
+          id = req.params.id;
           _context.next = 3;
           return regeneratorRuntime.awrap(User.findOne({
-            email: email
+            _id: id
           }));
 
         case 3:
           user = _context.sent;
 
           if (user) {
-            _context.next = 6;
+            if (user.length == 0) res.status(200).json({
+              message: "No User",
+              success: true
+            });else {
+              res.status(200).send(user);
+            }
+          } else {
+            user.createdAt = "0";
+            console.log(user.createdAt);
+            res.status(400).json({
+              user: user,
+              message: "couldn't find any user with that id",
+              id: req.id,
+              success: false
+            });
+          }
+
+        case 5:
+        case "end":
+          return _context.stop();
+      }
+    }
+  });
+};
+/**
+ * @DESC To Login the user (ADMIN, SUPER_ADMIN, USER)
+ */
+
+
+var userLogin = function userLogin(userCreds, res) {
+  var email, password, user, token, result;
+  return regeneratorRuntime.async(function userLogin$(_context2) {
+    while (1) {
+      switch (_context2.prev = _context2.next) {
+        case 0:
+          email = userCreds.email, password = userCreds.password; // First Check if the username is in the database
+
+          _context2.next = 3;
+          return regeneratorRuntime.awrap(User.findOne({
+            email: email
+          }));
+
+        case 3:
+          user = _context2.sent;
+
+          if (user) {
+            _context2.next = 6;
             break;
           }
 
-          return _context.abrupt("return", res.status(404).json({
+          return _context2.abrupt("return", res.status(404).json({
             message: "Email is not found. Invalid login credentials.",
             code: "ENF",
             success: false
@@ -52,7 +97,7 @@ var userLogin = function userLogin(userCreds, res) {
 
         case 6:
           if (!(password == user.password)) {
-            _context.next = 12;
+            _context2.next = 12;
             break;
           }
 
@@ -69,14 +114,15 @@ var userLogin = function userLogin(userCreds, res) {
             token: "Bearer ".concat(token),
             expiresIn: "24 Hours"
           };
-          return _context.abrupt("return", res.status(200).json(_objectSpread({}, result, {
+          return _context2.abrupt("return", res.status(200).json(_objectSpread({}, result, {
+            user_id: user.id,
             message: "Hurray! You are now logged in.",
             code: "SCS",
             success: true
           })));
 
         case 12:
-          return _context.abrupt("return", res.status(403).json({
+          return _context2.abrupt("return", res.status(403).json({
             message: "Incorrect password.",
             code: "IP",
             success: false
@@ -84,7 +130,7 @@ var userLogin = function userLogin(userCreds, res) {
 
         case 13:
         case "end":
-          return _context.stop();
+          return _context2.stop();
       }
     }
   });
@@ -96,12 +142,12 @@ var userLogin = function userLogin(userCreds, res) {
 
 var updateProfile = function updateProfile(req, res) {
   var id, user;
-  return regeneratorRuntime.async(function updateProfile$(_context2) {
+  return regeneratorRuntime.async(function updateProfile$(_context3) {
     while (1) {
-      switch (_context2.prev = _context2.next) {
+      switch (_context3.prev = _context3.next) {
         case 0:
           id = req.params.id;
-          _context2.next = 3;
+          _context3.next = 3;
           return regeneratorRuntime.awrap(User.findOne({
             _id: id
           }, function (err, foundObject) {
@@ -117,10 +163,6 @@ var updateProfile = function updateProfile(req, res) {
                   success: false
                 });
               } else {
-                if (req.body.avatar) {
-                  foundObject.avatar = req.body.avatar;
-                }
-
                 if (req.body.name) {
                   foundObject.name = req.body.name;
                 }
@@ -135,10 +177,6 @@ var updateProfile = function updateProfile(req, res) {
 
                 if (req.body.address) {
                   foundObject.address = req.body.address;
-                }
-
-                if (req.body.password) {
-                  foundObject.password = req.body.password;
                 }
 
                 foundObject.save(function (err) {
@@ -159,11 +197,11 @@ var updateProfile = function updateProfile(req, res) {
           }));
 
         case 3:
-          user = _context2.sent;
+          user = _context3.sent;
 
         case 4:
         case "end":
-          return _context2.stop();
+          return _context3.stop();
       }
     }
   });
@@ -171,22 +209,22 @@ var updateProfile = function updateProfile(req, res) {
 
 var validateUsername = function validateUsername(username) {
   var user;
-  return regeneratorRuntime.async(function validateUsername$(_context3) {
+  return regeneratorRuntime.async(function validateUsername$(_context4) {
     while (1) {
-      switch (_context3.prev = _context3.next) {
+      switch (_context4.prev = _context4.next) {
         case 0:
-          _context3.next = 2;
+          _context4.next = 2;
           return regeneratorRuntime.awrap(User.findOne({
             username: username
           }));
 
         case 2:
-          user = _context3.sent;
-          return _context3.abrupt("return", user ? false : true);
+          user = _context4.sent;
+          return _context4.abrupt("return", user ? false : true);
 
         case 4:
         case "end":
-          return _context3.stop();
+          return _context4.stop();
       }
     }
   });
@@ -205,22 +243,22 @@ var userAuth = passport.authenticate("jwt", {
 
 var validateEmail = function validateEmail(email) {
   var user;
-  return regeneratorRuntime.async(function validateEmail$(_context4) {
+  return regeneratorRuntime.async(function validateEmail$(_context5) {
     while (1) {
-      switch (_context4.prev = _context4.next) {
+      switch (_context5.prev = _context5.next) {
         case 0:
-          _context4.next = 2;
+          _context5.next = 2;
           return regeneratorRuntime.awrap(User.findOne({
             email: email
           }));
 
         case 2:
-          user = _context4.sent;
-          return _context4.abrupt("return", user ? false : true);
+          user = _context5.sent;
+          return _context5.abrupt("return", user ? false : true);
 
         case 4:
         case "end":
-          return _context4.stop();
+          return _context5.stop();
       }
     }
   });
@@ -247,5 +285,6 @@ module.exports = {
   userAuth: userAuth,
   userLogin: userLogin,
   updateProfile: updateProfile,
-  serializeUser: serializeUser
+  serializeUser: serializeUser,
+  getUserDetails: getUserDetails
 };

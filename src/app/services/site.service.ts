@@ -12,9 +12,11 @@ import {
     HttpRequest } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { LocalStorageService } from './local-storage.service';
+import { User } from '../classes/user';
 
 interface Response {
     code: string,
+    user_id: string,
     email: string,
     success: boolean,
     message: string, 
@@ -29,8 +31,7 @@ interface Result{
 
 const httpOptions = {
     headers: new HttpHeaders({
-      'Content-Type':  'application/json',
-      Authorization: 'my-auth-token'
+        'Content-Type':  'application/json'
     })
 };
 
@@ -46,7 +47,7 @@ export class SiteService {
         private router: Router,
         private http: HttpClient,
         private _storage: LocalStorageService
-    ) { }
+    ) {}
     
     
 
@@ -72,6 +73,37 @@ export class SiteService {
     }
 
     /**
+    * @DESC get user details 
+    */
+    getUserDetails(user_id: any){
+        return this.http.get<User[]>(environment.api + "users/get-user-details/"+user_id)
+    }
+
+    /**
+    * @DESC get update a product
+    */
+    updateUserProfile(
+        name: string, 
+        last_name: string, 
+        email: string,
+        address: Number,
+    ){
+        const Options = {
+            headers: new HttpHeaders({
+                'Content-Type':  'application/json',
+                'Authorization': JSON.stringify(this._storage.getItem('token'))
+            })
+        };
+        let user_id = this._storage.getItem('user_id');
+        return this.http.put<Result>(environment.api + "users/edit-profile/"+user_id,{
+            name, 
+            last_name, 
+            email,
+            address,
+        }, Options)
+    }
+
+    /**
     * @DESC login to dashboard 
     */
     loginDashboard(email: string, password: string){
@@ -88,6 +120,15 @@ export class SiteService {
     getProductById(id: any): Observable<any>{
         return this.http.get<any>(
             environment.api + "products/get-product/"+id
+        )
+    }
+    
+    /**
+    * @DESC get inserted last product  
+    */
+    getLastInsertedProduct(): Observable<any>{
+        return this.http.get<any>(
+            environment.api + "products/last-inserted-product/"
         )
     }
 
@@ -117,6 +158,34 @@ export class SiteService {
     */
     fetchLowOnStockProducts(){
         return this.http.get<Products[]>(environment.api + "products/products-low-on-stock")
+    }
+
+    /**
+    * @DESC count all products
+    */
+    countProducts(){
+        return this.http.get<any>(environment.api + "products/count-products")
+    }
+
+    /**
+    * @DESC count all in stock products
+    */
+    countInStockProducts(){
+        return this.http.get<any>(environment.api + "products/count-products-in-stock")
+    }
+    
+    /**
+    * @DESC count all low on stock products
+    */
+    countLowOnStockProducts(){
+        return this.http.get<any>(environment.api + "products/count-products-low-on-stock")
+    }
+    
+    /**
+    * @DESC count all out of stock products
+    */
+    countOutOfStockProducts(){
+        return this.http.get<any>(environment.api + "products/count-products-out-of-stock")
     }
     
     /**

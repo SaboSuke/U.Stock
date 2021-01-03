@@ -12,8 +12,7 @@ var environment_1 = require("src/environments/environment");
 var http_1 = require("@angular/common/http");
 var httpOptions = {
     headers: new http_1.HttpHeaders({
-        'Content-Type': 'application/json',
-        Authorization: 'my-auth-token'
+        'Content-Type': 'application/json'
     })
 };
 var params = new http_1.HttpParams({ fromString: 'name=foo' });
@@ -41,6 +40,30 @@ var SiteService = /** @class */ (function () {
         // );
     };
     /**
+    * @DESC get user details
+    */
+    SiteService.prototype.getUserDetails = function (user_id) {
+        return this.http.get(environment_1.environment.api + "users/get-user-details/" + user_id);
+    };
+    /**
+    * @DESC get update a product
+    */
+    SiteService.prototype.updateUserProfile = function (name, last_name, email, address) {
+        var Options = {
+            headers: new http_1.HttpHeaders({
+                'Content-Type': 'application/json',
+                'Authorization': JSON.stringify(this._storage.getItem('token'))
+            })
+        };
+        var user_id = this._storage.getItem('user_id');
+        return this.http.put(environment_1.environment.api + "users/edit-profile/" + user_id, {
+            name: name,
+            last_name: last_name,
+            email: email,
+            address: address
+        }, Options);
+    };
+    /**
     * @DESC login to dashboard
     */
     SiteService.prototype.loginDashboard = function (email, password) {
@@ -54,6 +77,12 @@ var SiteService = /** @class */ (function () {
     */
     SiteService.prototype.getProductById = function (id) {
         return this.http.get(environment_1.environment.api + "products/get-product/" + id);
+    };
+    /**
+    * @DESC get inserted last product
+    */
+    SiteService.prototype.getLastInsertedProduct = function () {
+        return this.http.get(environment_1.environment.api + "products/last-inserted-product/");
     };
     /**
     * @DESC get all product
@@ -78,6 +107,30 @@ var SiteService = /** @class */ (function () {
     */
     SiteService.prototype.fetchLowOnStockProducts = function () {
         return this.http.get(environment_1.environment.api + "products/products-low-on-stock");
+    };
+    /**
+    * @DESC count all products
+    */
+    SiteService.prototype.countProducts = function () {
+        return this.http.get(environment_1.environment.api + "products/count-products");
+    };
+    /**
+    * @DESC count all in stock products
+    */
+    SiteService.prototype.countInStockProducts = function () {
+        return this.http.get(environment_1.environment.api + "products/count-products-in-stock");
+    };
+    /**
+    * @DESC count all low on stock products
+    */
+    SiteService.prototype.countLowOnStockProducts = function () {
+        return this.http.get(environment_1.environment.api + "products/count-products-low-on-stock");
+    };
+    /**
+    * @DESC count all out of stock products
+    */
+    SiteService.prototype.countOutOfStockProducts = function () {
+        return this.http.get(environment_1.environment.api + "products/count-products-out-of-stock");
     };
     /**
     * @DESC get update a product

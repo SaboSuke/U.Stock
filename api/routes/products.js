@@ -10,6 +10,11 @@ const {
   editProduct,
   addProduct,
   fetchProductById,
+  countInStockProducts,
+  countLowOnStockProducts,
+  countOutOfStockProducts,
+  countProducts,
+  getLastInsertedProduct,
 } = require("../utils/Prod");
 
 // all products Route
@@ -20,6 +25,31 @@ router.get("/all-products", async (req, res) => {
 // get product by id Route
 router.get("/get-product/:id", async (req, res) => {
   await fetchProductById(req, res);
+});
+
+// get last inserted product Route
+router.get("/last-inserted-product/", async (req, res) => {
+  await getLastInsertedProduct(req, res);
+});
+
+// count all products Route
+router.get("/count-products", async (req, res) => {
+  await countProducts(req, res);
+});
+
+// count products in stock Route
+router.get("/count-products-in-stock", async (req, res) => {
+  await countInStockProducts(req, res);
+});
+
+// count products low on stock Route
+router.get("/count-products-low-on-stock", async (req, res) => {
+  await countLowOnStockProducts(req, res);
+});
+
+// count products out of stock Route
+router.get("/count-products-out-of-stock", async (req, res) => {
+  await countOutOfStockProducts(req, res);
 });
 
 // products in stock Route

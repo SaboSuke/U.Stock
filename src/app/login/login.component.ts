@@ -5,6 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { SiteService } from '../services/site.service';
 import { AuthService } from '../services/auth.service';
 import {MatSidenavModule} from '@angular/material/sidenav';
+import { LocalStorageService } from '../services/local-storage.service';
 
 @Component({
   selector: 'app-login',
@@ -18,7 +19,8 @@ export class LoginComponent implements OnInit {
     private router: Router,
     private formBuilder: FormBuilder,
     private _site: SiteService,
-    private _auth: AuthService
+    private _auth: AuthService,
+    private _storage: LocalStorageService
   ) { 
     this.checkoutForm = this.formBuilder.group({
       email: '',
@@ -35,9 +37,9 @@ export class LoginComponent implements OnInit {
     this._site.loginDashboard(customerData.email, customerData.password).subscribe(
       data =>{
         if (data.success){
-          console.log(data.message);
           this._auth.setLoggedIn(true)
-          this._auth.setToken(data.token);
+          this._auth.setToken(data.token)
+          this._storage.createItem('user_id', data.user_id)
           
           if (this._auth.isLoggedIn() == "true")
             //this.router.navigateByUrl('/dashboard/home');
@@ -45,9 +47,9 @@ export class LoginComponent implements OnInit {
           else
             console.log("you're not logged in")
         } else if (data.code == "ENF")
-            console.log(data.message);
+            console.log(data.message)
           else if (data.code == "IP")
-            console.log(data.message);
+            console.log(data.message)
       }
       ,error =>{
         console.log(error + " there has been an error");

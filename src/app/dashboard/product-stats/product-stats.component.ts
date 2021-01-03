@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { SiteService } from 'src/app/services/site.service';
 
 @Component({
   selector: 'app-product-stats',
@@ -7,9 +8,39 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ProductStatsComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    private _product: SiteService
+  ) { }
+
+  products: any;
+  instock : any;
+  outofstock : any;
+  lowonstock : any;
 
   ngOnInit(): void {
+    this._product.countProducts().subscribe(
+      (data) => {
+        this.products = data.count;
+      }
+    )
+
+    this._product.countInStockProducts().subscribe(
+      (data) => {
+        this.instock = data.count;
+      }
+    )
+
+    this._product.countOutOfStockProducts().subscribe(
+      (data) => {
+        this.outofstock = data.count;
+      }
+    )
+
+    this._product.countLowOnStockProducts().subscribe(
+      (data) => {
+        this.lowonstock = data.count;
+      }
+    )
   }
 
 }

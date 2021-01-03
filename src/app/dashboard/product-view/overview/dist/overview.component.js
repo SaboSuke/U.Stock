@@ -25,9 +25,6 @@ var OverviewComponent = /** @class */ (function () {
         var _this = this;
         var id = this.route.snapshot.params.id;
         this._storage.createItem('id', id);
-        // this._storage.createItem('info', data.info);
-        // this._storage.createItem('quantity', data.quantity.toString());
-        // this._storage.createItem('code', data.code);
         this._product.getProductById(id).subscribe(function (data) {
             console.log(data);
             _this.id = data.id;
