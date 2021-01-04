@@ -1,17 +1,17 @@
-<form [formGroup]="testing" (ngSubmit)="test(testing.value, $event)">
+<!-- <form [formGroup]="testing" (ngSubmit)="test(testing.value, $event)">
     <input type="file" name="image" multiple (change)="onFileSelected($event)" />
     <button type="submit" (click)="AddImage()">upload</button>
-</form>
+</form> -->
 <form [formGroup]="updateProduct" *ngIf="updateProduct" (ngSubmit)="UpdateProduct(updateProduct.value, $event)" class="spliter">
     <div class="left">
-        <div class="images">
+        <!-- <div class="images">
             <div class="image_box" *ngFor="let image of images">
                 <img src="../../../../assets/product/{{image}}" alt="product image">
             </div>
             <div class="image_box add">
                 <span>+</span>
             </div>
-        </div>
+        </div> -->
         <div class="column">
             <div class="input-group">
                 <h2>Quantity</h2>
@@ -45,3 +45,4 @@
         <button type="submit" class="btn btn-secondary"> Save </button>
     </div>
 </form>
+<ngx-spinner></ngx-spinner>

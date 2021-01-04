@@ -4,7 +4,8 @@ import { SiteService } from 'src/app/services/site.service';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
 import { LocalStorageService } from 'src/app/services/local-storage.service';
-
+import { NgxSpinnerService } from 'ngx-spinner';
+import Swal from 'sweetalert2';
 @Component({
   selector: 'app-edit',
   templateUrl: './edit.component.html',
@@ -23,13 +24,15 @@ export class EditComponent implements OnInit {
     private router: Router,
     private formBuilder:FormBuilder,
     private _product: SiteService,
-    private _storage: LocalStorageService
+    private _storage: LocalStorageService,
+    private spinner: NgxSpinnerService
   ) { 
     this.id = this.route.snapshot.params.id;
   }
 
   ngOnInit(): void {
-    this.testing = this.formBuilder.group({});
+    this.spinner.show();
+    // this.testing = this.formBuilder.group({});
     //getting product information
     this.id = this._storage.getItem('id')
     this._product.getProductById(this.id).subscribe(
@@ -45,6 +48,9 @@ export class EditComponent implements OnInit {
           quantity: this.product.quantity,
           info: this.product.internal_information,
         });
+        setTimeout(() => {
+          this.spinner.hide();
+        }, 100);
       },
       (error) =>  {
         console.log("there has been an error trying to fetch this product: "+this.id)
@@ -79,10 +85,10 @@ export class EditComponent implements OnInit {
   }
 
   UpdateProduct( data: any, dataevent: any) {
-    const fd = new FormData();
-    fd.append('image', this.selectedFile, this.selectedFile.name);
-    this.images.push(fd);
-    console.log(fd, this.images)
+    // const fd = new FormData();
+    // fd.append('image', this.selectedFile, this.selectedFile.name);
+    // this.images.push(fd);
+    // console.log(fd, this.images)
     this._product.UpdateProduct(
       data.name,
       data.description,
@@ -94,7 +100,28 @@ export class EditComponent implements OnInit {
     ).subscribe(
       (data) => {
         if(data.success){
-          console.log("Product updated successfully!")
+          const Toast = Swal.mixin({
+            toast: true,
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 1000,
+            timerProgressBar: true,
+            didOpen: (toast) => {
+              toast.addEventListener('mouseenter', Swal.stopTimer)
+              toast.addEventListener('mouseleave', Swal.resumeTimer)
+            }
+          })
+          
+          Toast.fire({
+            icon: 'info',
+            title: 'Update In Progress'
+          }).then(()=>{
+            Swal.fire(
+              'Success',
+              'Product Updated Successfully!',
+              'success'
+            )
+          })
         }else
           console.log("There has been an error updating your product!")
       },

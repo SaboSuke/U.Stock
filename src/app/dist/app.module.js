@@ -12,6 +12,10 @@ var core_1 = require("@angular/core");
 var router_1 = require("@angular/router");
 var forms_1 = require("@angular/forms");
 var http_1 = require("@angular/common/http");
+var highcharts_angular_1 = require("highcharts-angular");
+var ej2_angular_charts_1 = require("@syncfusion/ej2-angular-charts");
+var ngx_owl_carousel_o_1 = require("ngx-owl-carousel-o");
+var ngx_spinner_1 = require("ngx-spinner");
 var app_routing_module_1 = require("./app-routing.module");
 var app_component_1 = require("./app.component");
 var dashboard_component_1 = require("./dashboard/dashboard.component");
@@ -38,6 +42,8 @@ var product_view_component_1 = require("./dashboard/product-view/product-view.co
 var overview_component_1 = require("./dashboard/product-view/overview/overview.component");
 var edit_component_1 = require("./dashboard/product-view/edit/edit.component");
 var other_information_component_1 = require("./dashboard/product-view/other-information/other-information.component");
+var chartjs_component_1 = require("./chartjs/chartjs.component");
+var add_product_component_1 = require("./dashboard/add-product/add-product.component");
 exports.routes = [
     { path: '', redirectTo: '/login', pathMatch: 'full' },
     { path: 'login', component: login_component_1.LoginComponent, pathMatch: 'full' },
@@ -52,8 +58,9 @@ exports.routes = [
     { path: 'out-of-stock', component: out_of_stock_component_1.OutOfStockComponent },
     { path: 'dashboard/edit', component: edit_product_component_1.EditProductComponent },
     { path: 'dashboard/product/:id/overview', component: product_view_component_1.ProductViewComponent },
-    { path: 'dashboard/settings', component: settings_component_1.SettingsComponent },
     { path: 'dashboard/product/:id', component: product_list_component_1.ProductListComponent },
+    { path: 'dashboard/add-product', component: add_product_component_1.AddProductComponent },
+    { path: 'dashboard/settings', component: settings_component_1.SettingsComponent },
 ];
 var AppModule = /** @class */ (function () {
     function AppModule() {
@@ -82,15 +89,21 @@ var AppModule = /** @class */ (function () {
                 product_view_component_1.ProductViewComponent,
                 overview_component_1.OverviewComponent,
                 edit_component_1.EditComponent,
-                other_information_component_1.OtherInformationComponent
+                other_information_component_1.OtherInformationComponent,
+                chartjs_component_1.ChartjsComponent,
+                add_product_component_1.AddProductComponent
             ],
             imports: [
                 platform_browser_1.BrowserModule,
                 app_routing_module_1.AppRoutingModule,
                 forms_1.ReactiveFormsModule,
                 http_1.HttpClientModule,
-                router_1.RouterModule.forRoot(exports.routes),
-                animations_1.BrowserAnimationsModule
+                router_1.RouterModule.forRoot(exports.routes, { relativeLinkResolution: 'legacy' }),
+                animations_1.BrowserAnimationsModule,
+                highcharts_angular_1.HighchartsChartModule,
+                ej2_angular_charts_1.ChartModule,
+                ngx_owl_carousel_o_1.CarouselModule,
+                ngx_spinner_1.NgxSpinnerModule,
             ],
             providers: [
                 forms_1.FormBuilder,

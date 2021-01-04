@@ -81,6 +81,12 @@ var SiteService = /** @class */ (function () {
     /**
     * @DESC get inserted last product
     */
+    SiteService.prototype.getLastAddedProducts = function () {
+        return this.http.get(environment_1.environment.api + "products/last-added-products/");
+    };
+    /**
+    * @DESC get inserted last product
+    */
     SiteService.prototype.getLastInsertedProduct = function () {
         return this.http.get(environment_1.environment.api + "products/last-inserted-product/");
     };
@@ -150,8 +156,17 @@ var SiteService = /** @class */ (function () {
     /**
     * @DESC get add a new product
     */
-    SiteService.prototype.AddProduct = function () {
-        return this.http.get(environment_1.environment.api + "products/add-product");
+    SiteService.prototype.AddProduct = function (name, description, images, price, quantity, info, code, status) {
+        return this.http.post(environment_1.environment.api + "products/add-product", {
+            name: name,
+            description: description,
+            images: images,
+            price: price,
+            quantity: quantity,
+            info: info,
+            code: code,
+            status: status
+        });
     };
     /**
     * @DESC update product picture

@@ -1,0 +1,59 @@
+
+<app-topbar></app-topbar>
+<div class="content">
+    <app-sidebar></app-sidebar>
+    <div class="wrapper">
+        <div class="interface" >
+            <div class="inner-wrapper">
+                <form [formGroup]="addProduct" *ngIf="addProduct" (ngSubmit)="AddProduct(addProduct.value, $event)" class="spliter">
+                    <div class="left">
+                        <!-- <form [formGroup]="testing" (ngSubmit)="test(testing.value, $event)">
+                            <input type="file" name="image" multiple (change)="onFileSelected($event)" />
+                            <button type="submit" (click)="AddImage()">upload</button>
+                        </form> -->
+                        <div class="column">
+                            <div class="input-group">
+                                <h2>Quantity</h2>
+                                <input placeholder="Quantity..." type="text" formControlName="quantity" id="quantity">
+                            </div>
+                            <div class="input-group">
+                                <h2>Price</h2>
+                                <input placeholder="$0.00" type="text" formControlName="price" id="price">
+                            </div>
+                        </div>
+                        <div class="column">
+                            <div class="input-group">
+                                <h2>Internal Information</h2>
+                                <textarea placeholder="Internal Information..." type="text" formControlName="info" id="info"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="right">
+                        <div class="column">
+                            <div class="input-group">
+                                <h2>Name</h2>
+                                <input placeholder="Name..." type="text" formControlName="name" id="name">
+                            </div>
+                            <div class="input-group">
+                                <h2>Code</h2>
+                                <input placeholder="Code..." maxlength="8"  type="text" formControlName="code" id="code">
+                            </div>
+                        </div>
+                        <div class="column">
+                            <div class="input-group">
+                                <h2>Description</h2>
+                                <textarea placeholder="Description..." type="text" formControlName="description" id="description"></textarea>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-secondary"> Add </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="chat_bot">
+    <app-chatbot></app-chatbot>
+</div>
+<ngx-spinner></ngx-spinner>

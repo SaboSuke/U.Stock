@@ -15,6 +15,7 @@ const {
   countOutOfStockProducts,
   countProducts,
   getLastInsertedProduct,
+  getLastAddedProduct,
 } = require("../utils/Prod");
 
 // all products Route
@@ -25,6 +26,11 @@ router.get("/all-products", async (req, res) => {
 // get product by id Route
 router.get("/get-product/:id", async (req, res) => {
   await fetchProductById(req, res);
+});
+
+// get last 10 product Route
+router.get("/last-added-products/", async (req, res) => {
+  await getLastAddedProduct(req, res);
 });
 
 // get last inserted product Route

@@ -3,6 +3,7 @@ import { FormBuilder } from '@angular/forms';
 import { LocalStorageService } from 'src/app/services/local-storage.service';
 import { SiteService } from 'src/app/services/site.service';
 import Swal from 'sweetalert2'
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-settings',
@@ -16,7 +17,8 @@ export class SettingsComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private _site: SiteService,
-    private _storage: LocalStorageService
+    private _storage: LocalStorageService,
+    private spinner: NgxSpinnerService,
   ) { }
 
   name: string = ""
@@ -25,6 +27,7 @@ export class SettingsComponent implements OnInit {
   email: string = ""
 
   ngOnInit(): void {
+    this.spinner.show();
     let user_id = this._storage.getItem("user_id");
     this._site.getUserDetails(user_id).subscribe(
       (data: any) =>{
@@ -39,6 +42,9 @@ export class SettingsComponent implements OnInit {
           email: this.email,
           address: this.address
         });
+        setTimeout(() => {
+          this.spinner.hide();
+        }, 100);
       },
       (error) => console.log('error trying to get user details')
     )
@@ -46,24 +52,6 @@ export class SettingsComponent implements OnInit {
   }
 
   UpdateProfile(event: any, data: any) {
-    const swalWithBootstrapButtons = Swal.mixin({
-      customClass: {
-        confirmButton: 'btn btn-success',
-        cancelButton: 'btn btn-danger'
-      },
-      buttonsStyling: false
-    })
-    
-    swalWithBootstrapButtons.fire({
-      title: 'Are you sure?',
-      text: "You want to update your profile details?",
-      icon: 'warning',
-      showCancelButton: true,
-      confirmButtonText: 'Yes, udpate!',
-      cancelButtonText: 'No, cancel!',
-      reverseButtons: true
-    }).then((result) => {
-      if (result.isConfirmed) {
         this._site.updateUserProfile(
           data.name,
           data.last_name,
@@ -72,28 +60,35 @@ export class SettingsComponent implements OnInit {
         ).subscribe(
           (data) => {
             if(data.success){
-              swalWithBootstrapButtons.fire(
-                'Updated!',
-                'User updated successfully!',
-                'success'
-              )
+              const Toast = Swal.mixin({
+                toast: true,
+                position: 'top-end',
+                showConfirmButton: false,
+                timer: 1000,
+                timerProgressBar: true,
+                didOpen: (toast) => {
+                  toast.addEventListener('mouseenter', Swal.stopTimer)
+                  toast.addEventListener('mouseleave', Swal.resumeTimer)
+                }
+              })
+              
+              Toast.fire({
+                icon: 'info',
+                title: 'Updating Profile...'
+              }).then(()=>{
+                this.ngOnInit()
+                Swal.fire(
+                  'Success',
+                  'Profile Updated Successfully!',
+                  'success'
+                )
+              })
             }else
               console.log("There has been an error updating your profile!")
           },
           (error) => console.log(error)
         )
-        
-      } else if (
-        /* Read more about handling dismissals below */
-        result.dismiss === Swal.DismissReason.cancel
-      ) {
-        swalWithBootstrapButtons.fire(
-          'Cancelled',
-          'Profile update has been canceled!',
-          'error'
-        )
-      }
-    })
+    // })
   }
 
 }

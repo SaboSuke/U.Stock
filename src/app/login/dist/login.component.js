@@ -9,21 +9,28 @@ exports.__esModule = true;
 exports.LoginComponent = void 0;
 var core_1 = require("@angular/core");
 var LoginComponent = /** @class */ (function () {
-    function LoginComponent(router, formBuilder, _site, _auth, _storage) {
+    function LoginComponent(router, formBuilder, _site, _auth, _storage, spinner) {
         this.router = router;
         this.formBuilder = formBuilder;
         this._site = _site;
         this._auth = _auth;
         this._storage = _storage;
+        this.spinner = spinner;
         this.checkoutForm = this.formBuilder.group({
             email: '',
             password: ''
         });
     }
     LoginComponent.prototype.ngOnInit = function () {
+        var _this = this;
+        this.spinner.show();
+        setTimeout(function () {
+            _this.spinner.hide();
+        }, 1000);
     };
     LoginComponent.prototype.Login = function (customerData, event) {
         var _this = this;
+        this.spinner.show();
         event.preventDefault();
         //this.checkoutForm.reset();
         this._site.loginDashboard(customerData.email, customerData.password).subscribe(function (data) {
@@ -41,6 +48,9 @@ var LoginComponent = /** @class */ (function () {
                 console.log(data.message);
             else if (data.code == "IP")
                 console.log(data.message);
+            setTimeout(function () {
+                _this.spinner.hide();
+            }, 100);
         }, function (error) {
             console.log(error + " there has been an error");
         });

@@ -10,18 +10,26 @@ exports.OutOfStockComponent = void 0;
 var core_1 = require("@angular/core");
 var environment_1 = require("src/environments/environment");
 var OutOfStockComponent = /** @class */ (function () {
-    function OutOfStockComponent(_product) {
+    function OutOfStockComponent(_product, spinner, router) {
         this._product = _product;
+        this.spinner = spinner;
+        this.router = router;
     }
     OutOfStockComponent.prototype.ngOnInit = function () {
         var _this = this;
+        this.spinner.show();
         this.apiUrl = environment_1.environment.api;
         this._product.fetchOutOfStockProducts().subscribe(function (data) {
             _this.products = data;
-            console.log(_this.products);
+            setTimeout(function () {
+                _this.spinner.hide();
+            }, 100);
         }, function (error) {
             console.log("there has been an error trying to get all products!");
         });
+    };
+    OutOfStockComponent.prototype.Redirect = function (id) {
+        this.router.navigateByUrl("/dashboard/product/" + id + "/overview");
     };
     OutOfStockComponent = __decorate([
         core_1.Component({

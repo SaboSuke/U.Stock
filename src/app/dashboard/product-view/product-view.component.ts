@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-product-view',
@@ -7,12 +8,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ProductViewComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    private spinner: NgxSpinnerService,
+  ) { }
 
   ngOnInit(): void {
   }
   
-  changeindex: Number = 2;
+  changeindex: Number = 1;
 
   change(event: any, index: Number){
     console.log(event.target, index)

@@ -1,7 +1,8 @@
 <div *ngFor="let prod of products.prod">
     <div class="product" (click)="Redirect(prod._id)">
         <div>
-            <img src="../../../../assets/product/{{prod.images[0]}}" alt="product image">
+            <img *ngIf="prod.hasOwnProperty('images')" src="../../../../assets/product/{{prod.images[0]}}" alt="product image">
+            <img *ngIf="!prod.hasOwnProperty('images')" src="../../../../assets/product/not_available.png" alt="product image">
         </div>
         <div class="title">
             <p>{{prod.name}}</p>
@@ -30,3 +31,4 @@
         </div>
     </div>
 </div>
+<ngx-spinner></ngx-spinner>

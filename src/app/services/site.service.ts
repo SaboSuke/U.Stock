@@ -126,6 +126,15 @@ export class SiteService {
     /**
     * @DESC get inserted last product  
     */
+    getLastAddedProducts(): Observable<any>{
+        return this.http.get<any>(
+            environment.api + "products/last-added-products/"
+        )
+    }
+
+    /**
+    * @DESC get inserted last product  
+    */
     getLastInsertedProduct(): Observable<any>{
         return this.http.get<any>(
             environment.api + "products/last-inserted-product/"
@@ -215,8 +224,26 @@ export class SiteService {
     /**
     * @DESC get add a new product
     */
-    AddProduct(){
-        return this.http.get<Result>(environment.api + "products/add-product")
+    AddProduct(
+        name: string,
+        description: string,
+        images: any,
+        price: string,
+        quantity: any,
+        info: string,
+        code: string,
+        status:string
+    ){
+        return this.http.post<Result>(environment.api + "products/add-product", {
+            name,
+            description,
+            images,
+            price,
+            quantity,
+            info,
+            code,
+            status
+        })
     }
 
     /**

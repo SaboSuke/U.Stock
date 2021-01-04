@@ -7,9 +7,9 @@
                 <div class="left">
                     <div class="image"><img src="../../../assets/avatar/avatar.jpg" alt="avatar picture"></div>
                     <div class="content">
-                        <h2>Susan lily</h2>
-                        <p>California los angelos</p>
-                        <p>susan.lily@gmail.com</p>
+                        <h2>{{name +' '+ last_name}}</h2>
+                        <p>{{address}}</p>
+                        <p>{{email}}</p>
                     </div>
                 </div>
 
@@ -17,7 +17,7 @@
                     <form [formGroup]="profileform" *ngIf="profileform" (ngSubmit)="UpdateProfile($event, profileform.value)">
                         <div class="avatar">
                             <img src="../../../assets/avatar/avatar.jpg" alt="avatar picture">
-                            <a>Edit</a>
+                            <!-- <a>Edit</a> -->
                         </div>
                         <div class="column">
                             <div class="input-group">
@@ -50,3 +50,4 @@
 <div class="chat_bot">
     <app-chatbot></app-chatbot>
 </div>
+<ngx-spinner></ngx-spinner>

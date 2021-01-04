@@ -9,18 +9,21 @@ exports.__esModule = true;
 exports.OtherInformationComponent = void 0;
 var core_1 = require("@angular/core");
 var OtherInformationComponent = /** @class */ (function () {
-    function OtherInformationComponent(route, router, _product) {
+    function OtherInformationComponent(route, router, _product, spinner) {
         this.route = route;
         this.router = router;
         this._product = _product;
+        this.spinner = spinner;
         this.id = "";
         this.code = "";
         this.quantity = 0;
         this.info = "";
         this.images = [];
+        this.hasImage = false;
     }
     OtherInformationComponent.prototype.ngOnInit = function () {
         var _this = this;
+        this.spinner.show();
         var id = this.route.snapshot.params.id;
         this._product.getProductById(id).subscribe(function (data) {
             console.log(data);
@@ -28,7 +31,15 @@ var OtherInformationComponent = /** @class */ (function () {
             _this.quantity = parseInt(data.quantity);
             _this.info = data.internal_information;
             _this.id = data.id;
-            _this.images = data.images;
+            if (data.hasOwnProperty('images')) {
+                _this.images = data.images;
+                _this.hasImage = true;
+            }
+            else
+                _this.hasImage = false;
+            setTimeout(function () {
+                _this.spinner.hide();
+            }, 100);
         }, function (error) {
             console.log("there has been an error trying to fetch this product: " + id);
         });

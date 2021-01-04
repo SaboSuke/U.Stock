@@ -10,16 +10,21 @@ exports.AllComponent = void 0;
 var core_1 = require("@angular/core");
 var environment_1 = require("src/environments/environment");
 var AllComponent = /** @class */ (function () {
-    function AllComponent(_product, router) {
+    function AllComponent(_product, router, spinner) {
         this._product = _product;
         this.router = router;
+        this.spinner = spinner;
     }
     AllComponent.prototype.ngOnInit = function () {
         var _this = this;
+        this.spinner.show();
         this.apiUrl = environment_1.environment.api;
         this._product.fetchProducts().subscribe(function (data) {
             _this.products = data;
             console.log(_this.products);
+            setTimeout(function () {
+                _this.spinner.hide();
+            }, 100);
         }, function (error) {
             console.log("there has been an error trying to get all products!");
         });

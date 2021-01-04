@@ -1,5 +1,29 @@
 <div class="container">
     <div class="wrapper">
-        <convas id="myCanvas"></convas>
+        <owl-carousel-o [options]="customOptions">
+            <ng-template carouselSlide *ngFor="let product of products, let i=index">
+                <section class="package-area py-5">
+                    <div class="container">
+                        <div class="row d-flex justify-content-center">
+                            <div class="col-lg-4 col-xs-6 mb-5">
+                                <div class="package-rate position-relative">
+                                    <h3 class="title text-center">{{product.name | slice:0:23}}</h3>
+                                    <div class="thum text-center">
+                                        <img *ngIf="product.hasOwnProperty('images')" src="../../../assets/product/{{product.images[0]}}" alt="product image">
+                                        <img *ngIf="!product.hasOwnProperty('images')"src="../../../assets/product/not_available.png" alt="product image">
+                                    </div>
+                                    <h2 class="price text-center m-0">{{product.price}}</h2>
+                                    <p class="description text-justify">{{product.description | slice:0:100}}...</p>
+                                    <div class="view">
+                                        <a class="btn btn-secondary" (click)="Redirect(product._id)">View</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </ng-template>
+        </owl-carousel-o>
     </div>
 </div>
+<ngx-spinner></ngx-spinner>

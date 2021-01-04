@@ -9,8 +9,9 @@ exports.__esModule = true;
 exports.ProductViewComponent = void 0;
 var core_1 = require("@angular/core");
 var ProductViewComponent = /** @class */ (function () {
-    function ProductViewComponent() {
-        this.changeindex = 2;
+    function ProductViewComponent(spinner) {
+        this.spinner = spinner;
+        this.changeindex = 1;
     }
     ProductViewComponent.prototype.ngOnInit = function () {
     };

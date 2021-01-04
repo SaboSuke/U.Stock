@@ -9,20 +9,23 @@ exports.__esModule = true;
 exports.OverviewComponent = void 0;
 var core_1 = require("@angular/core");
 var OverviewComponent = /** @class */ (function () {
-    function OverviewComponent(route, router, _product, _storage) {
+    function OverviewComponent(route, router, _product, _storage, spinner) {
         this.route = route;
         this.router = router;
         this._product = _product;
         this._storage = _storage;
+        this.spinner = spinner;
         this.id = "";
         this.name = "";
         this.description = "";
         this.price = "";
         this.images = [];
         this.status = "";
+        this.hasImage = false;
     }
     OverviewComponent.prototype.ngOnInit = function () {
         var _this = this;
+        this.spinner.show();
         var id = this.route.snapshot.params.id;
         this._storage.createItem('id', id);
         this._product.getProductById(id).subscribe(function (data) {
@@ -30,9 +33,18 @@ var OverviewComponent = /** @class */ (function () {
             _this.id = data.id;
             _this.name = data.name;
             _this.description = data.description;
-            _this.images = data.images;
+            if (data.hasOwnProperty('images')) {
+                _this.images = data.images;
+                _this.hasImage = true;
+            }
+            else {
+                _this.hasImage = false;
+            }
             _this.price = data.price;
             _this.status = data.status;
+            setTimeout(function () {
+                _this.spinner.hide();
+            }, 100);
         }, function (error) {
             console.log("there has been an error trying to fetch this product: " + id);
         });

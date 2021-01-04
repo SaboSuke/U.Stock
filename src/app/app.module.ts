@@ -3,6 +3,11 @@ import { NgModule, CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA } from '@angular/cor
 import { Routes, RouterModule } from '@angular/router';
 import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { ChartsModule } from 'ng2-charts';
+import { HighchartsChartModule } from 'highcharts-angular';
+import { ChartModule } from '@syncfusion/ej2-angular-charts';
+import { CarouselModule } from 'ngx-owl-carousel-o';
+import { NgxSpinnerModule } from 'ngx-spinner';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -30,6 +35,8 @@ import { ProductViewComponent } from './dashboard/product-view/product-view.comp
 import { OverviewComponent } from './dashboard/product-view/overview/overview.component';
 import { EditComponent } from './dashboard/product-view/edit/edit.component';
 import { OtherInformationComponent } from './dashboard/product-view/other-information/other-information.component';
+import { ChartjsComponent } from './chartjs/chartjs.component';
+import { AddProductComponent } from './dashboard/add-product/add-product.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
@@ -45,8 +52,9 @@ export const routes: Routes = [
   { path: 'out-of-stock', component: OutOfStockComponent },
   { path: 'dashboard/edit', component: EditProductComponent},
   { path: 'dashboard/product/:id/overview', component: ProductViewComponent},
-  { path: 'dashboard/settings', component: SettingsComponent},
   { path: 'dashboard/product/:id', component: ProductListComponent},
+  { path: 'dashboard/add-product', component: AddProductComponent},
+  { path: 'dashboard/settings', component: SettingsComponent},
 ]
 
 @NgModule({
@@ -72,15 +80,21 @@ export const routes: Routes = [
     ProductViewComponent,
     OverviewComponent,
     EditComponent,
-    OtherInformationComponent
+    OtherInformationComponent,
+    ChartjsComponent,
+    AddProductComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
     HttpClientModule,
-    RouterModule.forRoot(routes),
-    BrowserAnimationsModule
+    RouterModule.forRoot(routes, { relativeLinkResolution: 'legacy' }),
+    BrowserAnimationsModule,
+    HighchartsChartModule,
+    ChartModule,
+    CarouselModule,
+    NgxSpinnerModule,
   ],
   providers: [
     FormBuilder,

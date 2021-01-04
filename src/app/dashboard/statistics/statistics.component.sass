@@ -3,8 +3,46 @@
 @import '../../../_variables.sass'
 
 .container 
-    height: 300px 
     width: 780px
-    background-color: $white
+    .wrappper
+        width: 100%
+.package-rate
+    position: relative
+    width: 250px
+    height: 380px
+    background: #fff
     border-radius: 20px
-    box-shadow: $boxShadow
+    padding: 20px 20px
+    transition: all .4s ease-in-out
+    &:hover
+        img
+            transform: scale(1.1) rotate(3deg)
+            opacity: .85
+        .view
+            transition: .5s all ease-in-out
+    .title
+        color: $primaryLight
+        font-size: 18px
+    .description
+        text-align: justify
+        font-size: 13px
+        margin-bottom: 20px
+    .view
+        position: absolute
+        bottom: 20px
+        transition: .5s all ease-in-out
+        margin-bottom: 15px
+        width: 100%
+    a
+        text-decoration: none
+        margin: 0 auto
+    .thum
+        overflow: hidden
+        height: 150px
+        img
+            max-height: 140px
+            transition: .4s
+    .price
+        font-size: 18px
+        padding: 5px 0
+        color: $primaryLight

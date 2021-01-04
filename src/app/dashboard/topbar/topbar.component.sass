@@ -6,6 +6,7 @@
     width: 95%
     margin: 0 auto
     .wrapper
+        position: relative
         margin-top: 20px
         background: $white
         height: 80px
@@ -31,3 +32,30 @@
             font-weight: bold
             font-size: 26px
             font-family: 'Quicksand regular', sans-serif
+
+.nav-container 
+    display: none
+    position: absolute
+    z-index: 2
+    top: 50px
+    right: 30px
+    background: $primaryLight
+    width: 100px
+    text-align: center
+    padding: 20px 10px
+    border-radius: 20px
+.nav
+    list-style: none
+    a
+        color: white
+        font-family: 'Quicksand, medium', sans-serif
+        font-size: 14px
+        &:hover  
+            cursor: pointer
+            color: $secondary
+
+.show_nav
+    width: 50px
+    &:hover 
+        .nav-container 
+            display: inherit

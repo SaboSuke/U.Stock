@@ -8,13 +8,15 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 exports.__esModule = true;
 exports.EditComponent = void 0;
 var core_1 = require("@angular/core");
+var sweetalert2_1 = require("sweetalert2");
 var EditComponent = /** @class */ (function () {
-    function EditComponent(route, router, formBuilder, _product, _storage) {
+    function EditComponent(route, router, formBuilder, _product, _storage, spinner) {
         this.route = route;
         this.router = router;
         this.formBuilder = formBuilder;
         this._product = _product;
         this._storage = _storage;
+        this.spinner = spinner;
         this.id = "";
         this.images = [];
         this.selectedFile = null;
@@ -22,7 +24,8 @@ var EditComponent = /** @class */ (function () {
     }
     EditComponent.prototype.ngOnInit = function () {
         var _this = this;
-        this.testing = this.formBuilder.group({});
+        this.spinner.show();
+        // this.testing = this.formBuilder.group({});
         //getting product information
         this.id = this._storage.getItem('id');
         this._product.getProductById(this.id).subscribe(function (data) {
@@ -37,6 +40,9 @@ var EditComponent = /** @class */ (function () {
                 quantity: _this.product.quantity,
                 info: _this.product.internal_information
             });
+            setTimeout(function () {
+                _this.spinner.hide();
+            }, 100);
         }, function (error) {
             console.log("there has been an error trying to fetch this product: " + _this.id);
         });
@@ -58,13 +64,29 @@ var EditComponent = /** @class */ (function () {
         }, function (error) { return console.log("error trying to add new image"); });
     };
     EditComponent.prototype.UpdateProduct = function (data, dataevent) {
-        var fd = new FormData();
-        fd.append('image', this.selectedFile, this.selectedFile.name);
-        this.images.push(fd);
-        console.log(fd, this.images);
+        // const fd = new FormData();
+        // fd.append('image', this.selectedFile, this.selectedFile.name);
+        // this.images.push(fd);
+        // console.log(fd, this.images)
         this._product.UpdateProduct(data.name, data.description, this.images, data.price, data.status, data.quantity, data.info).subscribe(function (data) {
             if (data.success) {
-                console.log("Product updated successfully!");
+                var Toast = sweetalert2_1["default"].mixin({
+                    toast: true,
+                    position: 'top-end',
+                    showConfirmButton: false,
+                    timer: 1000,
+                    timerProgressBar: true,
+                    didOpen: function (toast) {
+                        toast.addEventListener('mouseenter', sweetalert2_1["default"].stopTimer);
+                        toast.addEventListener('mouseleave', sweetalert2_1["default"].resumeTimer);
+                    }
+                });
+                Toast.fire({
+                    icon: 'info',
+                    title: 'Update In Progress'
+                }).then(function () {
+                    sweetalert2_1["default"].fire('Success', 'Product Updated Successfully!', 'success');
+                });
             }
             else
                 console.log("There has been an error updating your product!");

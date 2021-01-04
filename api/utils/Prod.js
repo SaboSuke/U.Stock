@@ -30,6 +30,28 @@ const fetchProducts = async (req, res) => {
 };
 
 /**
+ * @DESC To get last added product
+ */
+const getLastAddedProduct = async (req, res) => {
+  const prod = await Product.find({}).sort({_id: -1}).limit(10)
+  if (prod) {
+    if (prod.length == 0)
+      res.status(400).json({
+        message: "No Products Were Found",
+        success: true,
+      });
+    else {
+      res.status(200).send(prod)
+    }
+  } else {
+    res.status(400).json({
+      message: "couldn't find any product",
+      success: false,
+    });
+  }
+};
+
+/**
  * @DESC To get last inserted product
  */
 const getLastInsertedProduct = async (req, res) => {
@@ -376,7 +398,7 @@ const addProduct = async (req, res) => {
     description: req.body.description,
     images: req.body.images,
     status: req.body.status,
-    internal_information: req.body.internal_information,
+    internal_information: req.body.info,
   });
 
   await prod.save();
@@ -399,4 +421,5 @@ module.exports = {
   countOutOfStockProducts,
   countProducts,
   getLastInsertedProduct,
+  getLastAddedProduct,
 };

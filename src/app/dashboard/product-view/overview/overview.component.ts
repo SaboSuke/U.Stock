@@ -4,6 +4,7 @@ import { Products } from 'src/app/classes/products';
 import { SiteService } from 'src/app/services/site.service';
 import { CommonModule } from '@angular/common';
 import { LocalStorageService } from 'src/app/services/local-storage.service';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-overview',
@@ -17,7 +18,8 @@ export class OverviewComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private _product: SiteService,
-    private _storage: LocalStorageService
+    private _storage: LocalStorageService,
+    private spinner: NgxSpinnerService
   ) {}
   
 
@@ -28,7 +30,9 @@ export class OverviewComponent implements OnInit {
   images: Array<string> = [];
   status: string = "";
   
+  hasImage : boolean = false;
   ngOnInit(): void {
+    this.spinner.show();
     let id = this.route.snapshot.params.id;
     this._storage.createItem('id', id);
     this._product.getProductById(id).subscribe(
@@ -37,9 +41,17 @@ export class OverviewComponent implements OnInit {
         this.id = data.id
         this.name = data.name
         this.description = data.description
-        this.images = data.images
+        if (data.hasOwnProperty('images')){
+          this.images = data.images
+          this.hasImage = true
+        }else{
+          this.hasImage = false
+        }
         this.price = data.price
         this.status = data.status
+        setTimeout(() => {
+          this.spinner.hide();
+        }, 100);
       },
       (error) =>  {
         console.log("there has been an error trying to fetch this product: "+id)
