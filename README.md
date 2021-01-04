@@ -1,5 +1,5 @@
 # U.Stock
-Stock Management System
+Inventory Management System
 
 ## Setup
 * Installation
@@ -24,12 +24,6 @@ then get in the ./api folder and rerun
 
 > ```npm run manage```
 
-## Routes
-* API
-
-#### Global
-    >   localhost:5000/api/
-
-#### Specific routes
-
-    > localhost:5000/api/example: description
+## Login Credential
+    login: admin@gmail.com
+    pwd: admin
